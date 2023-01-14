@@ -4,6 +4,12 @@
   "manifest_version": 3,
   "description": "Block certain websites during designated focus times.",
   "action": {
+    "default_icon": {
+      "16": "images/disabled16.png",
+      "32": "images/disabled32.png",
+      "48": "images/disabled48.png",
+      "128": "images/disabled128.png"
+    },
     "default_popup": "popup.html"
   },
   "permissions": ["webNavigation", "storage", "tabs"],
@@ -11,9 +17,9 @@
     "service_worker": "background.js"
   },
   "icons": {
-    "16": "icon/icon16.png",
-    "32": "icon/icon32.png",
-    "48": "icon/icon48.png",
-    "128": "icon/icon128.png"
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
   }
 }
