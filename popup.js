@@ -1,8 +1,8 @@
 const onSave = () => {
   const enabled = document.getElementById("enabled").checked;
-  const websites = document.getElementById("websites").value;
-  const distinctWebsites = [...new Set(websites.split("\n"))].join("\n");
-  chrome.storage.local.set({ enabled, websites: distinctWebsites }, () => {
+  const rawWebsites = document.getElementById("websites").value.split("\n");
+  const websites = [...new Set(rawWebsites)];
+  chrome.storage.local.set({ enabled, websites }, () => {
     window.close();
   });
 }
@@ -10,7 +10,7 @@ const onSave = () => {
 const init = async () => {
   const { enabled, websites } = await chrome.storage.local.get(["enabled", "websites"]);
   document.getElementById("enabled").checked = enabled || false;
-  document.getElementById("websites").innerHTML = websites || '';
+  document.getElementById("websites").value = websites ? websites.join("\n") : '';
   document.getElementById("save").addEventListener("click", onSave);
 }
 

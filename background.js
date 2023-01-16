@@ -1,29 +1,36 @@
-chrome.tabs.onUpdated.addListener(function (tabId, _changeInfo, tab) {
-  chrome.storage.local.get(["enabled", "websites"], function (result) {
-    if (!result || !result.websites || !result.enabled) {
-      return;
-    }
-    let blockedWebsites = result.websites.split("\n");
-    for (const element of blockedWebsites) {
-      let website = element;
-      if (tab.url.indexOf(website) !== -1) {
-        chrome.tabs.update(tabId, { url: chrome.runtime.getURL("blocked.html") });
-        console.log("This website is blocked.");
-        return;
-      }
-    }
-  });
+function redirectIfBlocked(tab, blockedWebsites) {
+  if (blockedWebsites.some(website => tab.url.includes(website))) {
+    chrome.tabs.update(tab.id, { url: chrome.runtime.getURL("blocked.html") });
+  }
+}
+
+chrome.tabs.onUpdated.addListener(async function (_tabId, _changeInfo, tab) {
+  const result = await chrome.storage.local.get(["enabled", "websites"]);
+  if (!result || !result.websites || !result.enabled) {
+    return;
+  }
+  redirectIfBlocked(tab, result.websites);
 });
 
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason === "install") {
-    chrome.storage.local.set({ enabled: false, websites: "facebook.com\ntwitter.com\ninstagram.com\nyoutube.com\nwhatsapp.com" });
+    chrome.storage.local.set({ enabled: false, websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"] });
   }
 });
 
-chrome.storage.onChanged.addListener(function (changes) {
+// chrome.runtime.onUninstalled.addListener(function () {
+//   chrome.storage.local.clear();
+// });
+
+chrome.storage.onChanged.addListener(async function (changes) {
   if (changes.enabled) {
     if (changes.enabled.newValue) {
+      const result = await chrome.storage.local.get(["websites"]);
+      chrome.tabs.query({}, (tabs) => {
+        tabs.forEach(tab => {
+          redirectIfBlocked(tab, result.websites);
+        });
+      });
       chrome.action.setIcon({
         path: {
           "16": "images/enabled16.png",
