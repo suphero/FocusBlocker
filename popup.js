@@ -1,7 +1,8 @@
 const onSave = () => {
   const enabled = document.getElementById("enabled").checked;
   const websites = document.getElementById("websites").value;
-  chrome.storage.local.set({ enabled, websites }, () => {
+  const distinctWebsites = [...new Set(websites.split("\n"))].join("\n");
+  chrome.storage.local.set({ enabled, websites: distinctWebsites }, () => {
     window.close();
   });
 }
