@@ -13,6 +13,22 @@ function redirectIfBlocked(tab, blockedWebsites) {
   }
 }
 
+// redirectIfUnblocked will be given a tab and will see if the tab is on the blocked.html site.
+// If it is, it will redirect the tab to the original url which can be found in the query params.
+function redirectIfUnblocked(tab) {
+  const tabUrl = new URL(tab.url);
+  const blockedExtensionUrl = chrome.runtime.getURL("blocked.html");
+  const isBlockedSite = tabUrl.href.includes(blockedExtensionUrl);
+
+  if (isBlockedSite) {
+    const params = new URLSearchParams(tabUrl.search);
+    const originalUrl = params.get("url");
+    if (originalUrl) {
+      const decodedUrl = decodeURIComponent(originalUrl);
+      chrome.tabs.update(tab.id, { url: decodedUrl });
+    }
+  }
+}
 
 const onActivatedListener = async function (activeInfo) {
   const tab = await chrome.tabs.get(activeInfo.tabId);
@@ -56,7 +72,7 @@ chrome.storage.onChanged.addListener(async function (changes) {
     if (changes.enabled.newValue) {
       const result = await chrome.storage.local.get(["websites"]);
       const tab = await getCurrentTab();
-          redirectIfBlocked(tab, result.websites);
+      redirectIfBlocked(tab, result.websites);
       
       chrome.action.setIcon({
         path: {
@@ -67,6 +83,13 @@ chrome.storage.onChanged.addListener(async function (changes) {
         }
       });
     } else {
+      // Disabled focus mode, redirect sites back to their original unblocked state.
+      chrome.tabs.query({}, (tabs) => {
+        tabs.forEach((tab) => {
+          redirectIfUnblocked(tab);
+        });
+      });
+
       chrome.action.setIcon({
         path: {
           "16": "images/disabled16.png",
