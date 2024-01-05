@@ -1,6 +1,18 @@
 function redirectIfBlocked(tab, blockedWebsites) {
-  if (blockedWebsites.some(website => tab.url.includes(website))) {
-    chrome.tabs.update(tab.id, { url: chrome.runtime.getURL("blocked.html") });
+  const tabUrl = new URL(tab.url);
+  const isBlockedSite = blockedWebsites.some((website) =>
+    tabUrl.host.includes(website)
+  );
+
+  if (isBlockedSite) {
+    const blockedUrl = encodeURIComponent(tab.url);
+    const redirectUrl =
+      chrome.runtime.getURL("blocked.html") + "?url=" + blockedUrl;
+
+    chrome.tabs.update(tab.id, { url: redirectUrl });
+  }
+}
+
   }
 }
 
