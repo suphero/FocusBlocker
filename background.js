@@ -13,16 +13,26 @@ function redirectIfBlocked(tab, blockedWebsites) {
   }
 }
 
-  }
-}
 
-chrome.tabs.onUpdated.addListener(async function (_tabId, _changeInfo, tab) {
+const onActivatedListener = async function (activeInfo) {
+  const tab = await chrome.tabs.get(activeInfo.tabId);
+  redirectIfEnabled(tab);
+};
+
+const onUpdatedListener = async function (_tabId, _changeInfo, tab) {
+  redirectIfEnabled(tab);
+};
+
+const redirectIfEnabled = async function (tab) {
   const result = await chrome.storage.local.get(["enabled", "websites"]);
   if (!result || !result.websites || !result.enabled) {
     return;
   }
   redirectIfBlocked(tab, result.websites);
-});
+};
+
+chrome.tabs.onActivated.addListener(onActivatedListener);
+chrome.tabs.onUpdated.addListener(onUpdatedListener);
 
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason === "install") {
@@ -34,15 +44,20 @@ chrome.runtime.onInstalled.addListener(function (details) {
 //   chrome.storage.local.clear();
 // });
 
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
+
 chrome.storage.onChanged.addListener(async function (changes) {
   if (changes.enabled) {
     if (changes.enabled.newValue) {
       const result = await chrome.storage.local.get(["websites"]);
-      chrome.tabs.query({}, (tabs) => {
-        tabs.forEach(tab => {
+      const tab = await getCurrentTab();
           redirectIfBlocked(tab, result.websites);
-        });
-      });
+      
       chrome.action.setIcon({
         path: {
           "16": "images/enabled16.png",
