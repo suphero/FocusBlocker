@@ -5,8 +5,6 @@ A simple and easy-to-use Chrome extension that helps you stay focused and increa
 ## Features
 
 - Block any website you choose
-- See statistics of how much time you have spent on a blocked website
-- Set a reminder to take a break
 - Disable the extension with a single click
 
 ## How to use
