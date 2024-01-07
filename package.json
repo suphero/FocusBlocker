@@ -1,0 +1,22 @@
+{
+  "name": "focus-blocker",
+  "version": "0.0.4",
+  "description": "Block certain websites during designated focus times.",
+  "scripts": {
+    "build": "parcel build src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suphero/FocusBlocker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suphero/FocusBlocker/issues"
+  },
+  "homepage": "https://github.com/suphero/FocusBlocker#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0"
+  }
+}
