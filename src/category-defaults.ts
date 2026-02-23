@@ -1,0 +1,77 @@
+import type { Category } from "./types";
+
+export const DEFAULT_CATEGORIES: Category[] = [
+  {
+    id: "social",
+    name: "Social Media",
+    icon: "\uD83D\uDC65",
+    websites: [
+      "facebook.com",
+      "x.com",
+      "instagram.com",
+      "tiktok.com",
+      "reddit.com",
+      "linkedin.com",
+      "snapchat.com",
+      "threads.net",
+    ],
+    enabled: false,
+    isBuiltIn: true,
+  },
+  {
+    id: "news",
+    name: "News",
+    icon: "\uD83D\uDCF0",
+    websites: [
+      "cnn.com",
+      "bbc.com",
+      "nytimes.com",
+      "news.google.com",
+      "huffpost.com",
+    ],
+    enabled: false,
+    isBuiltIn: true,
+  },
+  {
+    id: "entertainment",
+    name: "Entertainment",
+    icon: "\uD83C\uDFAC",
+    websites: [
+      "youtube.com",
+      "netflix.com",
+      "twitch.tv",
+      "hulu.com",
+      "disneyplus.com",
+    ],
+    enabled: false,
+    isBuiltIn: true,
+  },
+  {
+    id: "shopping",
+    name: "Shopping",
+    icon: "\uD83D\uDED2",
+    websites: [
+      "amazon.com",
+      "ebay.com",
+      "etsy.com",
+      "aliexpress.com",
+      "temu.com",
+    ],
+    enabled: false,
+    isBuiltIn: true,
+  },
+  {
+    id: "gaming",
+    name: "Gaming",
+    icon: "\uD83C\uDFAE",
+    websites: [
+      "store.steampowered.com",
+      "twitch.tv",
+      "discord.com",
+      "roblox.com",
+      "epicgames.com",
+    ],
+    enabled: false,
+    isBuiltIn: true,
+  },
+];

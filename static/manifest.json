@@ -12,7 +12,7 @@
     },
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "tabs", "alarms", "notifications"],
   "background": {
     "service_worker": "background.js",
     "type": "module"

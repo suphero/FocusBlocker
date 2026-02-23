@@ -39,11 +39,11 @@
 
 ## 5. Yeni Özellikler — Yüksek Etki
 
-- [ ] **Pomodoro / Zamanlayıcı** — "25 dk odaklan, 5 dk mola" zaman bazlı bloklama
-- [ ] **Zaman planlaması** — Belirli gün ve saatlerde otomatik aktifleştirme (ör. hafta içi 09:00-17:00)
-- [ ] **Şifre koruması** — Ayarları değiştirmek için şifre gerekliliği
-- [ ] **Kategori / Grup** — "Sosyal medya", "Haberler" gibi gruplar halinde toplu engelleme
-- [ ] **İstatistikler** — Kaç kez engellendiği, hangi sitelere en çok gitmeye çalışıldığı
+- [x] **Pomodoro / Zamanlayıcı** — "25 dk odaklan, 5 dk mola" zaman bazlı bloklama
+- [x] **Zaman planlaması** — Belirli gün ve saatlerde otomatik aktifleştirme (ör. hafta içi 09:00-17:00)
+- [x] **Şifre koruması** — Ayarları değiştirmek için şifre gerekliliği
+- [x] **Kategori / Grup** — "Sosyal medya", "Haberler" gibi gruplar halinde toplu engelleme
+- [x] **İstatistikler** — Kaç kez engellendiği, hangi sitelere en çok gitmeye çalışıldığı
 
 ## 6. Yeni Özellikler — Orta Etki
 

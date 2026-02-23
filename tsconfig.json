@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
     "rootDir": "src",
-    "types": ["chrome"]
+    "types": ["chrome", "node"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

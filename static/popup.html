@@ -7,21 +7,125 @@
 </head>
 
 <body>
-    <h1>Focus Blocker</h1>
-    <div class="toggle-row">
-        <label class="switch" for="enabled">
-            <input id="enabled" type="checkbox">
-            <span class="slider"></span>
-        </label>
-        <span id="toggleLabel" class="toggle-label">Focus Mode: OFF</span>
+    <!-- Tab bar -->
+    <nav class="tab-bar">
+        <button class="tab-btn active" data-tab="blocker" title="Block">
+            <span class="tab-icon">&#x1F6E1;</span>
+            <span class="tab-label">Block</span>
+        </button>
+        <button class="tab-btn" data-tab="timer" title="Timer">
+            <span class="tab-icon">&#x23F1;</span>
+            <span class="tab-label">Timer</span>
+        </button>
+        <button class="tab-btn" data-tab="schedule" title="Schedule">
+            <span class="tab-icon">&#x1F4C5;</span>
+            <span class="tab-label">Schedule</span>
+        </button>
+        <button class="tab-btn" data-tab="groups" title="Groups">
+            <span class="tab-icon">&#x1F4C1;</span>
+            <span class="tab-label">Groups</span>
+        </button>
+        <button class="tab-btn" data-tab="stats" title="Stats">
+            <span class="tab-icon">&#x1F4CA;</span>
+            <span class="tab-label">Stats</span>
+        </button>
+    </nav>
+
+    <!-- ═══ Blocker Tab ═══ -->
+    <div id="tab-blocker" class="tab-panel active">
+        <div class="toggle-row">
+            <label class="switch" for="enabled">
+                <input id="enabled" type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <span id="toggleLabel" class="toggle-label">Focus Mode: OFF</span>
+        </div>
+        <span class="section-label">Blocked Websites</span>
+        <div id="chipList" class="chip-list"></div>
+        <div class="add-site">
+            <input id="siteInput" type="text" placeholder="example.com">
+            <button id="addBtn" type="button">Add</button>
+        </div>
+        <div class="password-section">
+            <span class="section-label">Password Protection</span>
+            <div id="unlockCountdown" class="unlock-countdown hidden"></div>
+            <div class="password-actions">
+                <button id="setPasswordBtn" class="btn-secondary" type="button">Set Password</button>
+                <button id="removePasswordBtn" class="btn-danger-sm hidden" type="button">Remove</button>
+            </div>
+            <div id="passwordSetupForm" class="password-setup-form">
+                <input id="newPassword1" type="password" placeholder="New password">
+                <input id="newPassword2" type="password" placeholder="Confirm password">
+                <div id="pwSetupError" class="error hidden"></div>
+                <button id="savePasswordBtn" type="button">Save Password</button>
+            </div>
+        </div>
     </div>
-    <span class="section-label">Blocked Websites</span>
-    <div id="chipList" class="chip-list"></div>
-    <div class="add-site">
-        <input id="siteInput" type="text" placeholder="example.com">
-        <button id="addBtn" type="button">Add</button>
+
+    <!-- ═══ Pomodoro Tab ═══ -->
+    <div id="tab-timer" class="tab-panel">
+        <div class="pomodoro-container">
+            <div id="progressRing" class="progress-ring" style="--progress: 0">
+                <div class="progress-inner">
+                    <div id="timerText" class="timer-text">25:00</div>
+                    <div id="phaseLabel" class="phase-label">Ready</div>
+                </div>
+            </div>
+            <div id="sessionDots" class="session-dots"></div>
+            <div class="pomodoro-actions">
+                <button id="pomodoroStart" class="btn-primary" type="button">Start Focus</button>
+                <button id="pomodoroSkip" class="btn-secondary" type="button" disabled>Skip</button>
+                <button id="pomodoroReset" class="btn-secondary" type="button" disabled>Reset</button>
+            </div>
+        </div>
     </div>
-    <button id="save" class="save-btn" type="button">Save</button>
+
+    <!-- ═══ Schedule Tab ═══ -->
+    <div id="tab-schedule" class="tab-panel">
+        <div class="toggle-row">
+            <label class="switch" for="scheduleEnabled">
+                <input id="scheduleEnabled" type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <span id="scheduleToggleLabel" class="toggle-label">Scheduling: OFF</span>
+        </div>
+        <div id="scheduleContent"></div>
+        <button id="addScheduleBtn" class="btn-add" type="button">+ Add Schedule</button>
+    </div>
+
+    <!-- ═══ Categories Tab ═══ -->
+    <div id="tab-groups" class="tab-panel">
+        <span class="section-label">Categories</span>
+        <div id="categoriesContent"></div>
+        <button id="addCategoryBtn" class="btn-add" type="button">+ Custom Category</button>
+        <div id="addCategoryForm" class="add-category-form">
+            <input id="newCatIcon" type="text" placeholder="&#x1F4C1;" maxlength="2" class="icon-input">
+            <input id="newCatName" type="text" placeholder="Category name">
+            <button id="saveCategoryBtn" type="button">Add</button>
+        </div>
+    </div>
+
+    <!-- ═══ Stats Tab ═══ -->
+    <div id="tab-stats" class="tab-panel">
+        <div class="stats-period">
+            <button class="stats-period-btn active" data-period="today">Today</button>
+            <button class="stats-period-btn" data-period="week">Week</button>
+            <button class="stats-period-btn" data-period="month">Month</button>
+        </div>
+        <div id="statsContent"></div>
+        <button id="resetStats" class="btn-danger-sm" type="button">Reset Stats</button>
+    </div>
+
+    <!-- ═══ Password Modal ═══ -->
+    <div id="passwordModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Enter Password</h2>
+            <input id="passwordInput" type="password" placeholder="Password">
+            <div id="passwordError" class="error hidden">Incorrect password</div>
+            <button id="passwordSubmit" type="button">Unlock</button>
+        </div>
+    </div>
+
     <script type="module" src="popup.js"></script>
 </body>
 
