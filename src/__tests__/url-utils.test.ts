@@ -21,6 +21,22 @@ describe("isDomainBlocked", () => {
   it("should not match unrelated domain", () => {
     expect(isDomainBlocked("google.com", "facebook.com")).toBe(false);
   });
+
+  it("should match subdomain with wildcard pattern", () => {
+    expect(isDomainBlocked("old.reddit.com", "*.reddit.com")).toBe(true);
+  });
+
+  it("should match base domain with wildcard pattern", () => {
+    expect(isDomainBlocked("reddit.com", "*.reddit.com")).toBe(true);
+  });
+
+  it("should match deep subdomain with wildcard pattern", () => {
+    expect(isDomainBlocked("a.b.reddit.com", "*.reddit.com")).toBe(true);
+  });
+
+  it("should not match unrelated domain with wildcard pattern", () => {
+    expect(isDomainBlocked("noreddit.com", "*.reddit.com")).toBe(false);
+  });
 });
 
 describe("isValidHttpUrl", () => {
@@ -88,6 +104,18 @@ describe("extractDomain", () => {
 
   it("should accept short domains", () => {
     expect(extractDomain("a.co")).toBe("a.co");
+  });
+
+  it("should accept wildcard pattern", () => {
+    expect(extractDomain("*.reddit.com")).toBe("*.reddit.com");
+  });
+
+  it("should reject wildcard without domain", () => {
+    expect(extractDomain("*.")).toBeNull();
+  });
+
+  it("should reject wildcard with single label", () => {
+    expect(extractDomain("*.com")).toBeNull();
   });
 });
 

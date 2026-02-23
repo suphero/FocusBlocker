@@ -47,10 +47,10 @@
 
 ## 6. Yeni Özellikler — Orta Etki
 
-- [ ] **Import / Export** — Ayarları JSON olarak dışa/içe aktarma
-- [ ] **Wildcard desteği** — `*.reddit.com` gibi pattern matching
-- [ ] **Keyboard shortcuts** — Hızlı toggle için kısayol tuşları
-- [ ] **Site başına silme** — Listeden tek tek site kaldırabilme
+- [x] **Import / Export** — Ayarları JSON olarak dışa/içe aktarma
+- [x] **Wildcard desteği** — `*.reddit.com` gibi pattern matching
+- [x] **Keyboard shortcuts** — Hızlı toggle için kısayol tuşları
+- [x] **Site başına silme** — Listeden tek tek site kaldırabilme
 
 ## 7. Yeni Özellikler — Profesyonellik
 

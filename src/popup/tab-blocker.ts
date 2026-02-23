@@ -1,5 +1,6 @@
 import { extractDomain } from "../url-utils";
-import { getStorage, setStorage } from "../storage";
+import { getStorage, setStorage, STORAGE_DEFAULTS } from "../storage";
+import type { StorageSchema } from "../types";
 import { requirePassword, UNLOCK_DURATION } from "./password-modal";
 import { hashPassword, generateSalt } from "../crypto-utils";
 import type { Category } from "../types";
@@ -161,8 +162,14 @@ export async function initBlockerTab(): Promise<void> {
     addWebsite(siteInput.value);
   });
 
+  // Data import/export
+  initDataActions();
+
   // Password setup
   await initPasswordSettings();
+
+  // Re-start countdown immediately when password is unlocked
+  window.addEventListener("password-unlocked", () => startUnlockCountdown());
 }
 
 async function initPasswordSettings(): Promise<void> {
@@ -230,6 +237,92 @@ function updatePasswordUI(isEnabled: boolean): void {
   }
 
   startUnlockCountdown();
+}
+
+// ── Import / Export ─────────────────────────────
+
+function showDataFeedback(message: string, success: boolean): void {
+  const el = document.getElementById("dataFeedback") as HTMLDivElement;
+  el.textContent = message;
+  el.className = `data-feedback data-feedback--${success ? "success" : "error"}`;
+  setTimeout(() => el.classList.add("hidden"), 3000);
+}
+
+async function exportSettings(): Promise<void> {
+  try {
+    const data = await getStorage();
+    // Exclude runtime pomodoro state from export
+    const exportData: Partial<StorageSchema> = {
+      ...data,
+      pomodoro: { ...data.pomodoro, phase: "idle", completedSessions: 0, endTime: null },
+    };
+
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `focus-blocker-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showDataFeedback("Settings exported!", true);
+  } catch (error) {
+    console.error("Failed to export settings:", error);
+    showDataFeedback("Export failed.", false);
+  }
+}
+
+function isValidImport(data: unknown): data is Partial<StorageSchema> {
+  if (typeof data !== "object" || data === null || Array.isArray(data)) return false;
+  const obj = data as Record<string, unknown>;
+  // Must have at least one recognizable key
+  const knownKeys = Object.keys(STORAGE_DEFAULTS);
+  return knownKeys.some((key) => key in obj);
+}
+
+async function importSettings(file: File): Promise<void> {
+  try {
+    const text = await file.text();
+    const data = JSON.parse(text);
+
+    if (!isValidImport(data)) {
+      showDataFeedback("Invalid backup file.", false);
+      return;
+    }
+
+    // Merge with defaults to fill any missing fields
+    const merged = { ...STORAGE_DEFAULTS, ...data };
+    // Reset runtime pomodoro state
+    merged.pomodoro = { ...merged.pomodoro, phase: "idle", completedSessions: 0, endTime: null };
+
+    await setStorage(merged);
+    await refreshBlockerChips();
+
+    // Re-sync toggle UI
+    const enabled = merged.enabled;
+    (document.getElementById("enabled") as HTMLInputElement).checked = enabled;
+    updateToggleLabel(enabled);
+
+    showDataFeedback("Settings imported!", true);
+  } catch (error) {
+    console.error("Failed to import settings:", error);
+    showDataFeedback("Invalid JSON file.", false);
+  }
+}
+
+function initDataActions(): void {
+  const exportBtn = document.getElementById("exportBtn") as HTMLButtonElement;
+  const importBtn = document.getElementById("importBtn") as HTMLButtonElement;
+  const importFile = document.getElementById("importFile") as HTMLInputElement;
+
+  exportBtn.addEventListener("click", exportSettings);
+  importBtn.addEventListener("click", () => importFile.click());
+  importFile.addEventListener("change", () => {
+    const file = importFile.files?.[0];
+    if (file) {
+      importSettings(file);
+      importFile.value = ""; // reset so same file can be re-imported
+    }
+  });
 }
 
 // ── Unlock countdown ────────────────────────────

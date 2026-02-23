@@ -802,6 +802,49 @@ input:checked + .slider:before {
   font-variant-numeric: tabular-nums;
 }
 
+/* ═══ Data Section ═══ */
+
+.data-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.data-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.data-feedback {
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.data-feedback--success {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.data-feedback--error {
+  background: #fbe9e7;
+  color: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+  .data-feedback--success {
+    background: #1b3a1f;
+    color: #81c784;
+  }
+
+  .data-feedback--error {
+    background: #3e1a1a;
+    color: #ef9a9a;
+  }
+}
+
 /* ═══ Password Section ═══ */
 
 .password-section {

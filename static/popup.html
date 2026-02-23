@@ -46,6 +46,16 @@
             <input id="siteInput" type="text" placeholder="example.com">
             <button id="addBtn" type="button">Add</button>
         </div>
+        <div class="data-section">
+            <span class="section-label">Data</span>
+            <div class="data-actions">
+                <button id="exportBtn" class="btn-secondary" type="button">Export</button>
+                <button id="importBtn" class="btn-secondary" type="button">Import</button>
+                <input id="importFile" type="file" accept=".json" class="hidden">
+            </div>
+            <div id="dataFeedback" class="data-feedback hidden"></div>
+        </div>
+
         <div class="password-section">
             <span class="section-label">Password Protection</span>
             <div id="unlockCountdown" class="unlock-countdown hidden"></div>

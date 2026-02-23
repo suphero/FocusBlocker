@@ -236,6 +236,42 @@ async function handleScheduleCheck(): Promise<void> {
   }
 }
 
+// ── Keyboard shortcuts ──────────────────────────
+
+const UNLOCK_DURATION = 5 * 60 * 1000; // must match password-modal.ts
+
+function isPasswordLocked(data: import("./types").StorageSchema): boolean {
+  if (!data.password.isEnabled || !data.password.hash) return false;
+  if (data.password.lastUnlockedAt && Date.now() - data.password.lastUnlockedAt < UNLOCK_DURATION) {
+    return false;
+  }
+  return true;
+}
+
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === "toggle-blocking") {
+    try {
+      const data = await getStorage();
+      const newEnabled = !data.enabled;
+
+      // Turning OFF requires password — can't show modal from background
+      if (!newEnabled && isPasswordLocked(data)) {
+        chrome.notifications.create("shortcut-locked-" + Date.now(), {
+          type: "basic",
+          iconUrl: "images/logo128.png",
+          title: "Password Required",
+          message: "Open the popup to enter your password first.",
+        });
+        return;
+      }
+
+      await setStorage({ enabled: newEnabled, enabledBy: newEnabled ? "manual" : null });
+    } catch (error) {
+      console.error("Failed to toggle via shortcut:", error);
+    }
+  }
+});
+
 // ── Icon sync on service worker startup ─────────
 
 async function syncIcon(): Promise<void> {

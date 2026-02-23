@@ -1,4 +1,9 @@
 export function isDomainBlocked(host: string, blockedDomain: string): boolean {
+  // Wildcard pattern: *.example.com matches sub.example.com but NOT example.com
+  if (blockedDomain.startsWith("*.")) {
+    const base = blockedDomain.slice(2); // "example.com"
+    return host === base || host.endsWith("." + base);
+  }
   return host === blockedDomain || host.endsWith("." + blockedDomain);
 }
 
@@ -30,6 +35,12 @@ export function extractDomain(input: string): string | null {
 
   // Treat as bare domain — basic validation
   const domain = trimmed.replace(/\/.*$/, ""); // strip path
+
+  // Wildcard pattern: *.example.com
+  if (/^\*\.[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(domain)) {
+    return domain;
+  }
+
   if (/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(domain)) {
     return domain;
   }

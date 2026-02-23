@@ -52,6 +52,7 @@ function showPasswordModal(): Promise<boolean> {
           password: { ...data.password, lastUnlockedAt: Date.now() },
         });
         cleanup();
+        window.dispatchEvent(new CustomEvent("password-unlocked"));
         resolve(true);
       } else {
         error.classList.remove("hidden");
