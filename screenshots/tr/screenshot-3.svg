@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#283593"/>
+      <stop offset="100%" stop-color="#7986CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <circle cx="200" cy="100" r="350" fill="white" opacity="0.04"/>
+  <circle cx="1100" cy="700" r="400" fill="white" opacity="0.04"/>
+
+  <!-- Left: Schedule popup mockup -->
+  <g transform="translate(80, 60)" filter="url(#shadow)">
+    <rect width="460" height="660" rx="16" fill="white"/>
+
+    <text x="30" y="50" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="#1a1a1a">Odak Engelleyici</text>
+
+    <rect x="30" y="74" width="64" height="34" rx="17" fill="#5C6BC0"/>
+    <circle cx="77" cy="91" r="13" fill="white"/>
+    <text x="108" y="97" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#5C6BC0">Zamanlama: AÇIK</text>
+
+    <!-- Schedule card 1 -->
+    <rect x="30" y="130" width="400" height="190" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="50" y="160" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">Çalışma Saatleri</text>
+
+    <rect x="50" y="175" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="60" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Paz</text>
+    <rect x="98" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="110" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Pzt</text>
+    <rect x="146" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="157" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Sal</text>
+    <rect x="194" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="204" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Çar</text>
+    <rect x="242" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="253" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Per</text>
+    <rect x="290" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="299" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Cum</text>
+    <rect x="338" y="175" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="347" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Cmt</text>
+
+    <rect x="50" y="220" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="100" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">09:00</text>
+    <text x="215" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#888">—</text>
+    <rect x="230" y="220" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">17:00</text>
+
+    <!-- Schedule card 2 -->
+    <rect x="30" y="340" width="400" height="190" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="50" y="370" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">Ders Zamanı</text>
+
+    <rect x="50" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="60" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Paz</text>
+    <rect x="98" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="110" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Pzt</text>
+    <rect x="146" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="157" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Sal</text>
+    <rect x="194" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="204" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Çar</text>
+    <rect x="242" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="253" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Per</text>
+    <rect x="290" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="299" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Cum</text>
+    <rect x="338" y="385" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="347" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Cmt</text>
+
+    <rect x="50" y="430" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="100" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">14:00</text>
+    <text x="215" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#888">—</text>
+    <rect x="230" y="430" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">18:00</text>
+
+    <rect x="30" y="550" width="400" height="40" rx="8" fill="none" stroke="#5C6BC0" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text x="230" y="576" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5C6BC0" text-anchor="middle">+ Takvim Ekle</text>
+
+    <line x1="0" y1="600" x2="460" y2="600" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="28" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">🛡️</text>
+    <text x="105" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⏱️</text>
+    <text x="182" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📅</text>
+    <rect x="172" y="644" width="44" height="3" rx="1.5" fill="#5C6BC0"/>
+    <text x="259" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📁</text>
+    <text x="336" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📊</text>
+    <text x="413" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⚙️</text>
+  </g>
+
+  <!-- Right: Marketing copy (Turkish) -->
+  <text x="640" y="240" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="bold" fill="white">Odak Zamanını</text>
+  <text x="640" y="310" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="bold" fill="white">Planla</text>
+  <text x="640" y="370" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="white" opacity="0.85">Belirli gün ve saatlerde otomatik engelle</text>
+
+  <rect x="640" y="420" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="428" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Birden fazla takvim oluştur</text>
+  <rect x="640" y="458" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="466" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Haftanın günlerini seç</text>
+  <rect x="640" y="496" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="504" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Başlangıç ve bitiş saati belirle</text>
+  <rect x="640" y="534" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="542" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Otomatik odak modu etkinleştirme</text>
+</svg>

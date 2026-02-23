@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <circle cx="0" cy="800" r="400" fill="white" opacity="0.04"/>
+  <circle cx="1280" cy="0" r="350" fill="white" opacity="0.04"/>
+  <circle cx="640" cy="400" r="500" fill="white" opacity="0.02"/>
+
+  <!-- Center: Brand + Icon -->
+  <!-- Shield icon large -->
+  <g transform="translate(100, 200)">
+    <path d="M80 0 L16 28 V76 C16 116 80 144 80 144 S144 116 144 76 V28 Z" fill="white" opacity="0.15"/>
+    <path d="M80 8 L22 34 V76 C22 112 80 138 80 138 S138 112 138 76 V34 Z" fill="none" stroke="white" stroke-width="3" opacity="0.4"/>
+  </g>
+
+  <text x="120" y="430" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="bold" fill="white">Focus Blocker</text>
+  <text x="120" y="480" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="white" opacity="0.8">Block distractions. Stay focused.</text>
+
+  <!-- Feature icons row -->
+  <g transform="translate(120, 530)">
+    <!-- Block -->
+    <rect width="90" height="90" rx="20" fill="white" opacity="0.15"/>
+    <text x="45" y="58" font-family="Arial, Helvetica, sans-serif" font-size="40" text-anchor="middle">🛡️</text>
+    <!-- Timer -->
+    <rect x="110" width="90" height="90" rx="20" fill="white" opacity="0.15"/>
+    <text x="155" y="58" font-family="Arial, Helvetica, sans-serif" font-size="40" text-anchor="middle">⏱️</text>
+    <!-- Schedule -->
+    <rect x="220" width="90" height="90" rx="20" fill="white" opacity="0.15"/>
+    <text x="265" y="58" font-family="Arial, Helvetica, sans-serif" font-size="40" text-anchor="middle">📅</text>
+    <!-- Stats -->
+    <rect x="330" width="90" height="90" rx="20" fill="white" opacity="0.15"/>
+    <text x="375" y="58" font-family="Arial, Helvetica, sans-serif" font-size="40" text-anchor="middle">📊</text>
+  </g>
+
+  <!-- Right: Popup mockup -->
+  <g transform="translate(680, 60)" filter="url(#shadow)">
+    <rect width="460" height="660" rx="16" fill="white"/>
+
+    <text x="30" y="50" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="#1a1a1a">Focus Blocker</text>
+
+    <rect x="30" y="70" width="64" height="34" rx="17" fill="#2196F3"/>
+    <circle cx="77" cy="87" r="13" fill="white"/>
+    <text x="108" y="93" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#2196F3">Focus Mode: ON</text>
+
+    <rect x="30" y="120" width="110" height="32" rx="16" fill="#2196F3"/>
+    <text x="52" y="141" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="white">Blacklist</text>
+    <rect x="140" y="120" width="110" height="32" rx="16" fill="#f0f0f0"/>
+    <text x="162" y="141" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="#666">Whitelist</text>
+
+    <text x="30" y="185" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" fill="#888" letter-spacing="1.5">BLOCKED WEBSITES</text>
+
+    <rect x="30" y="200" width="148" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="46" y="222" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">facebook.com</text>
+    <text x="163" y="222" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+    <rect x="186" y="200" width="92" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="202" y="222" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">x.com</text>
+    <text x="263" y="222" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+    <rect x="286" y="200" width="140" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="302" y="222" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">instagram.com</text>
+    <text x="411" y="222" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+
+    <rect x="30" y="242" width="138" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="46" y="264" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">youtube.com</text>
+    <text x="153" y="264" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+    <rect x="176" y="242" width="118" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="192" y="264" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">reddit.com</text>
+    <text x="279" y="264" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+    <rect x="302" y="242" width="128" height="34" rx="17" fill="#e8f0fe"/>
+    <text x="318" y="264" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#1a73e8">tiktok.com</text>
+    <text x="415" y="264" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999">×</text>
+
+    <rect x="30" y="296" width="320" height="38" rx="8" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="46" y="320" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#bbb">example.com</text>
+    <rect x="358" y="296" width="72" height="38" rx="8" fill="#2196F3"/>
+    <text x="380" y="320" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="500" fill="white">Add</text>
+
+    <line x1="0" y1="600" x2="460" y2="600" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="28" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">🛡️</text>
+    <rect x="18" y="644" width="44" height="3" rx="1.5" fill="#2196F3"/>
+    <text x="105" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⏱️</text>
+    <text x="182" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📅</text>
+    <text x="259" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📁</text>
+    <text x="336" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📊</text>
+    <text x="413" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⚙️</text>
+  </g>
+</svg>

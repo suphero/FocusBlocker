@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <circle cx="640" cy="400" r="500" fill="white" opacity="0.03"/>
+  <circle cx="100" cy="100" r="300" fill="white" opacity="0.03"/>
+
+  <!-- Left: Stats visual -->
+  <text x="80" y="100" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="bold" fill="white">Statistics</text>
+  <text x="80" y="140" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="white" opacity="0.7">Track your focus progress</text>
+
+  <!-- Large stat number -->
+  <text x="80" y="280" font-family="Arial, Helvetica, sans-serif" font-size="120" font-weight="bold" fill="white" opacity="0.9">47</text>
+  <text x="80" y="320" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="white" opacity="0.6">blocks today</text>
+
+  <!-- Mini bar chart decorative -->
+  <g transform="translate(80, 380)">
+    <rect x="0" y="80" width="50" height="120" rx="6" fill="white" opacity="0.25"/>
+    <rect x="70" y="40" width="50" height="160" rx="6" fill="white" opacity="0.35"/>
+    <rect x="140" y="100" width="50" height="100" rx="6" fill="white" opacity="0.2"/>
+    <rect x="210" y="0" width="50" height="200" rx="6" fill="white" opacity="0.45"/>
+    <rect x="280" y="60" width="50" height="140" rx="6" fill="white" opacity="0.3"/>
+    <rect x="350" y="120" width="50" height="80" rx="6" fill="white" opacity="0.2"/>
+  </g>
+
+  <!-- Right: Stats popup mockup -->
+  <g transform="translate(680, 80)" filter="url(#shadow)">
+    <rect width="440" height="640" rx="16" fill="white"/>
+
+    <text x="28" y="46" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="#1a1a1a">Focus Blocker</text>
+
+    <!-- Period filter -->
+    <rect x="28" y="66" width="80" height="32" rx="16" fill="#9C27B0"/>
+    <text x="50" y="87" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="white">Today</text>
+    <rect x="116" y="66" width="80" height="32" rx="16" fill="#f0f0f0"/>
+    <text x="140" y="87" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="#666">Week</text>
+    <rect x="204" y="66" width="80" height="32" rx="16" fill="#f0f0f0"/>
+    <text x="224" y="87" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="#666">Month</text>
+
+    <!-- Total -->
+    <text x="220" y="145" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" fill="#1a1a1a" text-anchor="middle">47</text>
+    <text x="220" y="170" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#888" text-anchor="middle">blocks</text>
+
+    <!-- Bar chart -->
+    <g transform="translate(28, 200)">
+      <!-- facebook.com -->
+      <text x="0" y="15" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666">facebook.com</text>
+      <rect x="130" y="2" width="220" height="18" rx="4" fill="#CE93D8"/>
+      <text x="360" y="16" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#888">18</text>
+
+      <!-- youtube.com -->
+      <text x="0" y="50" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666">youtube.com</text>
+      <rect x="130" y="37" width="165" height="18" rx="4" fill="#CE93D8" opacity="0.8"/>
+      <text x="305" y="51" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#888">12</text>
+
+      <!-- instagram.com -->
+      <text x="0" y="85" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666">instagram.com</text>
+      <rect x="130" y="72" width="110" height="18" rx="4" fill="#CE93D8" opacity="0.6"/>
+      <text x="250" y="86" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#888">9</text>
+
+      <!-- x.com -->
+      <text x="0" y="120" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666">x.com</text>
+      <rect x="130" y="107" width="60" height="18" rx="4" fill="#CE93D8" opacity="0.5"/>
+      <text x="200" y="121" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#888">5</text>
+
+      <!-- reddit.com -->
+      <text x="0" y="155" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666">reddit.com</text>
+      <rect x="130" y="142" width="36" height="18" rx="4" fill="#CE93D8" opacity="0.4"/>
+      <text x="176" y="156" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#888">3</text>
+    </g>
+
+    <!-- Reset stats button -->
+    <rect x="28" y="520" width="384" height="40" rx="8" fill="none" stroke="#ccc" stroke-width="1"/>
+    <text x="220" y="546" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#999" text-anchor="middle">Reset Stats</text>
+
+    <line x1="0" y1="580" x2="440" y2="580" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="24" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">🛡️</text>
+    <text x="97" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">⏱️</text>
+    <text x="170" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">📅</text>
+    <text x="243" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">📁</text>
+    <text x="316" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">📊</text>
+    <rect x="308" y="622" width="38" height="3" rx="1.5" fill="#9C27B0"/>
+    <text x="389" y="614" font-family="Arial, Helvetica, sans-serif" font-size="18">⚙️</text>
+  </g>
+</svg>

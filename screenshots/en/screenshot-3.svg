@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#283593"/>
+      <stop offset="100%" stop-color="#7986CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <circle cx="200" cy="100" r="350" fill="white" opacity="0.04"/>
+  <circle cx="1100" cy="700" r="400" fill="white" opacity="0.04"/>
+
+  <!-- Left: Popup mockup -->
+  <g transform="translate(80, 60)" filter="url(#shadow)">
+    <rect width="460" height="660" rx="16" fill="white"/>
+
+    <!-- Header -->
+    <text x="30" y="50" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="#1a1a1a">Focus Blocker</text>
+
+    <!-- Schedule toggle -->
+    <rect x="30" y="74" width="64" height="34" rx="17" fill="#5C6BC0"/>
+    <circle cx="77" cy="91" r="13" fill="white"/>
+    <text x="108" y="97" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#5C6BC0">Scheduling: ON</text>
+
+    <!-- Schedule card 1 -->
+    <rect x="30" y="130" width="400" height="190" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="50" y="160" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">Work Hours</text>
+
+    <!-- Day buttons -->
+    <rect x="50" y="175" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="60" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Sun</text>
+    <rect x="98" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="106" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Mon</text>
+    <rect x="146" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="155" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Tue</text>
+    <rect x="194" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="201" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Wed</text>
+    <rect x="242" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="251" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Thu</text>
+    <rect x="290" y="175" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="302" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Fri</text>
+    <rect x="338" y="175" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="349" y="195" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Sat</text>
+
+    <!-- Time range -->
+    <rect x="50" y="220" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="100" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">09:00</text>
+    <text x="215" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#888">—</text>
+    <rect x="230" y="220" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="243" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">17:00</text>
+
+    <!-- Delete button -->
+    <text x="400" y="160" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#ccc">🗑️</text>
+
+    <!-- Schedule card 2 -->
+    <rect x="30" y="340" width="400" height="190" rx="10" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="50" y="370" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#1a1a1a">Study Time</text>
+
+    <!-- Day buttons card 2 -->
+    <rect x="50" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="60" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Sun</text>
+    <rect x="98" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="106" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Mon</text>
+    <rect x="146" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="155" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Tue</text>
+    <rect x="194" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="201" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Wed</text>
+    <rect x="242" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="251" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Thu</text>
+    <rect x="290" y="385" width="42" height="30" rx="15" fill="#e8eaed"/>
+    <text x="302" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#666">Fri</text>
+    <rect x="338" y="385" width="42" height="30" rx="15" fill="#5C6BC0"/>
+    <text x="349" y="405" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="white">Sat</text>
+
+    <rect x="50" y="430" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="100" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">14:00</text>
+    <text x="215" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#888">—</text>
+    <rect x="230" y="430" width="150" height="36" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="280" y="453" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#1a1a1a" text-anchor="middle">18:00</text>
+
+    <!-- Add Schedule button -->
+    <rect x="30" y="550" width="400" height="40" rx="8" fill="none" stroke="#5C6BC0" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text x="230" y="576" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#5C6BC0" text-anchor="middle">+ Add Schedule</text>
+
+    <!-- Tab bar -->
+    <line x1="0" y1="600" x2="460" y2="600" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="28" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">🛡️</text>
+    <text x="105" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⏱️</text>
+    <text x="182" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📅</text>
+    <rect x="172" y="644" width="44" height="3" rx="1.5" fill="#5C6BC0"/>
+    <text x="259" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📁</text>
+    <text x="336" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">📊</text>
+    <text x="413" y="636" font-family="Arial, Helvetica, sans-serif" font-size="20">⚙️</text>
+  </g>
+
+  <!-- Right: Marketing copy -->
+  <text x="640" y="260" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="bold" fill="white">Schedule Your</text>
+  <text x="640" y="330" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="bold" fill="white">Focus Time</text>
+  <text x="640" y="390" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="white" opacity="0.85">Auto-block at specific days and hours</text>
+
+  <rect x="640" y="440" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="448" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Create multiple schedules</text>
+  <rect x="640" y="478" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="486" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Pick days of the week</text>
+  <rect x="640" y="516" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="524" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Set start and end times</text>
+  <rect x="640" y="554" width="6" height="6" rx="3" fill="#9FA8DA"/>
+  <text x="660" y="562" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="white" opacity="0.9">Automatic focus mode activation</text>
+</svg>

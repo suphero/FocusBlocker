@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" width="1400" height="560">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="50%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="shadowSm">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="560" fill="url(#bg)"/>
+  <circle cx="0" cy="560" r="350" fill="white" opacity="0.04"/>
+  <circle cx="700" cy="-100" r="400" fill="white" opacity="0.03"/>
+  <circle cx="1400" cy="560" r="300" fill="white" opacity="0.04"/>
+
+  <!-- Left: Branding -->
+  <!-- Shield icon -->
+  <g transform="translate(80, 100)">
+    <path d="M50 0 L10 17.5 V47.5 C10 72.5 50 90 50 90 S90 72.5 90 47.5 V17.5 Z" fill="white" opacity="0.18"/>
+    <path d="M50 6 L16 21 V47.5 C16 68 50 84 50 84 S84 68 84 47.5 V21 Z" fill="none" stroke="white" stroke-width="2.5" opacity="0.45"/>
+    <polyline points="32,46 45,58 70,30" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.75"/>
+  </g>
+
+  <text x="80" y="250" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="bold" fill="white">Focus Blocker</text>
+  <text x="80" y="300" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="white" opacity="0.8">Block distracting websites. Stay focused.</text>
+  <text x="80" y="330" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="white" opacity="0.8">Boost your productivity.</text>
+
+  <!-- Feature pills -->
+  <rect x="80" y="370" width="140" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="110" y="394" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Pomodoro Timer</text>
+  <rect x="234" y="370" width="120" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="258" y="394" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Scheduling</text>
+  <rect x="368" y="370" width="120" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="392" y="394" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Dark Mode</text>
+
+  <rect x="80" y="420" width="120" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="104" y="444" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Categories</text>
+  <rect x="214" y="420" width="110" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="240" y="444" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Statistics</text>
+  <rect x="338" y="420" width="140" height="38" rx="19" fill="white" opacity="0.15"/>
+  <text x="358" y="444" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="white" opacity="0.9">Password Lock</text>
+
+  <!-- Center: Block tab popup -->
+  <g transform="translate(580, 40)" filter="url(#shadow)">
+    <rect width="340" height="480" rx="12" fill="white"/>
+
+    <text x="22" y="38" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#1a1a1a">Focus Blocker</text>
+
+    <!-- Toggle -->
+    <rect x="22" y="52" width="48" height="26" rx="13" fill="#2196F3"/>
+    <circle cx="57" cy="65" r="9.5" fill="white"/>
+    <text x="80" y="70" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" fill="#2196F3">Focus Mode: ON</text>
+
+    <!-- Mode toggle -->
+    <rect x="22" y="90" width="82" height="26" rx="13" fill="#2196F3"/>
+    <text x="38" y="107" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" fill="white">Blacklist</text>
+    <rect x="104" y="90" width="82" height="26" rx="13" fill="#f0f0f0"/>
+    <text x="120" y="107" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="500" fill="#666">Whitelist</text>
+
+    <text x="22" y="142" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" fill="#888" letter-spacing="1.2">BLOCKED WEBSITES</text>
+
+    <!-- Chips -->
+    <rect x="22" y="154" width="112" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="34" y="172" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">facebook.com</text>
+    <text x="122" y="173" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#999">×</text>
+    <rect x="140" y="154" width="72" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="152" y="172" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">x.com</text>
+    <text x="200" y="173" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#999">×</text>
+    <rect x="218" y="154" width="104" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="230" y="172" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">instagram.com</text>
+
+    <rect x="22" y="190" width="106" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="34" y="208" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">youtube.com</text>
+    <text x="116" y="209" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#999">×</text>
+    <rect x="134" y="190" width="92" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="146" y="208" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">reddit.com</text>
+    <text x="214" y="209" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#999">×</text>
+    <rect x="232" y="190" width="90" height="28" rx="14" fill="#e8f0fe"/>
+    <text x="244" y="208" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#1a73e8">tiktok.com</text>
+
+    <!-- Input -->
+    <rect x="22" y="234" width="222" height="32" rx="6" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="34" y="255" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#bbb">example.com</text>
+    <rect x="250" y="234" width="68" height="32" rx="6" fill="#2196F3"/>
+    <text x="270" y="255" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="500" fill="white">Add</text>
+
+    <!-- Tab bar -->
+    <line x1="0" y1="432" x2="340" y2="432" stroke="#e0e0e0" stroke-width="1"/>
+    <rect x="14" y="448" width="8" height="8" rx="4" fill="#2196F3"/>
+    <rect x="14" y="464" width="30" height="2.5" rx="1.25" fill="#2196F3"/>
+    <rect x="70" y="448" width="8" height="8" rx="4" fill="#ccc"/>
+    <rect x="126" y="448" width="8" height="8" rx="4" fill="#ccc"/>
+    <rect x="182" y="448" width="8" height="8" rx="4" fill="#ccc"/>
+    <rect x="238" y="448" width="8" height="8" rx="4" fill="#ccc"/>
+    <rect x="294" y="448" width="8" height="8" rx="4" fill="#ccc"/>
+  </g>
+
+  <!-- Right: Dark mode popup (offset lower) -->
+  <g transform="translate(1000, 80)" filter="url(#shadow)">
+    <rect width="320" height="440" rx="12" fill="#1e1e1e"/>
+
+    <text x="20" y="36" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#e0e0e0">Focus Blocker</text>
+
+    <!-- Timer view in dark mode -->
+    <circle cx="160" cy="180" r="90" fill="none" stroke="#3a3a3a" stroke-width="7"/>
+    <circle cx="160" cy="180" r="90" fill="none" stroke="#64b5f6" stroke-width="7"
+            stroke-dasharray="565" stroke-dashoffset="141" stroke-linecap="round"
+            transform="rotate(-90 160 180)"/>
+    <text x="160" y="175" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="bold" fill="#e0e0e0" text-anchor="middle">18:32</text>
+    <text x="160" y="205" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#64b5f6" text-anchor="middle" font-weight="500">Focus</text>
+
+    <!-- Session dots -->
+    <circle cx="130" cy="240" r="5.5" fill="#64b5f6"/>
+    <circle cx="150" cy="240" r="5.5" fill="#3a3a3a"/>
+    <circle cx="170" cy="240" r="5.5" fill="#3a3a3a"/>
+    <circle cx="190" cy="240" r="5.5" fill="#3a3a3a"/>
+
+    <!-- Buttons -->
+    <rect x="40" y="280" width="110" height="36" rx="6" fill="#3a3a3a"/>
+    <text x="95" y="303" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" fill="#a0a0a0" text-anchor="middle">Skip</text>
+    <rect x="170" y="280" width="110" height="36" rx="6" fill="#ef5350"/>
+    <text x="225" y="303" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" fill="white" text-anchor="middle">Reset</text>
+
+    <!-- Tab bar dark -->
+    <line x1="0" y1="392" x2="320" y2="392" stroke="#3a3a3a" stroke-width="1"/>
+    <rect x="12" y="408" width="8" height="8" rx="4" fill="#666"/>
+    <rect x="64" y="408" width="8" height="8" rx="4" fill="#64b5f6"/>
+    <rect x="56" y="424" width="28" height="2.5" rx="1.25" fill="#64b5f6"/>
+    <rect x="116" y="408" width="8" height="8" rx="4" fill="#666"/>
+    <rect x="168" y="408" width="8" height="8" rx="4" fill="#666"/>
+    <rect x="220" y="408" width="8" height="8" rx="4" fill="#666"/>
+    <rect x="272" y="408" width="8" height="8" rx="4" fill="#666"/>
+  </g>
+</svg>
