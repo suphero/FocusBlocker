@@ -50,22 +50,30 @@ const onUpdatedListener = async (
 };
 
 const redirectIfEnabled = async (tab: chrome.tabs.Tab): Promise<void> => {
-  const result = await chrome.storage.local.get(["enabled", "websites"]);
-  if (!result || !result.websites || !result.enabled) {
-    return;
+  try {
+    const result = await chrome.storage.local.get(["enabled", "websites"]);
+    if (!result || !result.websites || !result.enabled) {
+      return;
+    }
+    redirectIfBlocked(tab, result.websites as string[]);
+  } catch (error) {
+    console.error("Failed to read storage:", error);
   }
-  redirectIfBlocked(tab, result.websites as string[]);
 };
 
 chrome.tabs.onActivated.addListener(onActivatedListener);
 chrome.tabs.onUpdated.addListener(onUpdatedListener);
 
-chrome.runtime.onInstalled.addListener((details) => {
+chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === "install") {
-    chrome.storage.local.set({
-      enabled: false,
-      websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"],
-    });
+    try {
+      await chrome.storage.local.set({
+        enabled: false,
+        websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"],
+      });
+    } catch (error) {
+      console.error("Failed to set default settings:", error);
+    }
   }
 });
 
@@ -78,10 +86,14 @@ async function getCurrentTab(): Promise<chrome.tabs.Tab | undefined> {
 chrome.storage.onChanged.addListener(async (changes) => {
   if (changes.enabled) {
     if (changes.enabled.newValue) {
-      const result = await chrome.storage.local.get(["websites"]);
-      const tab = await getCurrentTab();
-      if (tab) {
-        redirectIfBlocked(tab, result.websites as string[]);
+      try {
+        const result = await chrome.storage.local.get(["websites"]);
+        const tab = await getCurrentTab();
+        if (tab) {
+          redirectIfBlocked(tab, result.websites as string[]);
+        }
+      } catch (error) {
+        console.error("Failed to read websites from storage:", error);
       }
 
       chrome.action.setIcon({

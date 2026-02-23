@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isDomainBlocked, isValidHttpUrl } from "../url-utils";
+import { isDomainBlocked, isValidHttpUrl, extractDomain, sanitizeWebsiteList } from "../url-utils";
 
 describe("isDomainBlocked", () => {
   it("should match exact domain", () => {
@@ -42,5 +42,92 @@ describe("isValidHttpUrl", () => {
 
   it("should reject invalid URLs", () => {
     expect(isValidHttpUrl("not a url")).toBe(false);
+  });
+});
+
+describe("extractDomain", () => {
+  it("should extract domain from bare domain", () => {
+    expect(extractDomain("facebook.com")).toBe("facebook.com");
+  });
+
+  it("should extract domain from URL with https", () => {
+    expect(extractDomain("https://facebook.com/page")).toBe("facebook.com");
+  });
+
+  it("should extract domain from URL with http", () => {
+    expect(extractDomain("http://m.facebook.com")).toBe("m.facebook.com");
+  });
+
+  it("should lowercase the domain", () => {
+    expect(extractDomain("Facebook.COM")).toBe("facebook.com");
+  });
+
+  it("should trim whitespace", () => {
+    expect(extractDomain("  facebook.com  ")).toBe("facebook.com");
+  });
+
+  it("should strip path from bare domain", () => {
+    expect(extractDomain("facebook.com/page/123")).toBe("facebook.com");
+  });
+
+  it("should return null for empty string", () => {
+    expect(extractDomain("")).toBeNull();
+  });
+
+  it("should return null for whitespace only", () => {
+    expect(extractDomain("   ")).toBeNull();
+  });
+
+  it("should return null for single word without TLD", () => {
+    expect(extractDomain("facebook")).toBeNull();
+  });
+
+  it("should return null for javascript: protocol", () => {
+    expect(extractDomain("javascript:alert(1)")).toBeNull();
+  });
+
+  it("should accept short domains", () => {
+    expect(extractDomain("a.co")).toBe("a.co");
+  });
+});
+
+describe("sanitizeWebsiteList", () => {
+  it("should filter out empty lines", () => {
+    expect(sanitizeWebsiteList(["facebook.com", "", "twitter.com", ""])).toEqual([
+      "facebook.com",
+      "twitter.com",
+    ]);
+  });
+
+  it("should deduplicate entries", () => {
+    expect(sanitizeWebsiteList(["facebook.com", "facebook.com", "twitter.com"])).toEqual([
+      "facebook.com",
+      "twitter.com",
+    ]);
+  });
+
+  it("should deduplicate case-insensitively", () => {
+    expect(sanitizeWebsiteList(["Facebook.com", "facebook.com"])).toEqual(["facebook.com"]);
+  });
+
+  it("should extract domains from full URLs", () => {
+    expect(sanitizeWebsiteList(["https://facebook.com/page"])).toEqual(["facebook.com"]);
+  });
+
+  it("should deduplicate bare domain and URL form", () => {
+    expect(sanitizeWebsiteList(["facebook.com", "https://facebook.com/page"])).toEqual([
+      "facebook.com",
+    ]);
+  });
+
+  it("should filter out invalid entries", () => {
+    expect(sanitizeWebsiteList(["facebook.com", "not valid", "", "twitter.com"])).toEqual([
+      "facebook.com",
+      "twitter.com",
+    ]);
+  });
+
+  it("should return empty array for all invalid input", () => {
+    expect(sanitizeWebsiteList(["", "  ", "hello"])).toEqual([]);
   });
 });

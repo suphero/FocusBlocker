@@ -25,9 +25,9 @@
 
 ## 3. Kod Kalitesi
 
-- [ ] **Input validation** — Boş satır, geçersiz URL, tekrarlayan girişler filtrelenmeli
-- [ ] **Hata yönetimi** — `chrome.storage` çağrılarına error handling eklenmeli
-- [ ] **Yorum satırındaki ölü kod temizliği** — `background.js:59-61` `onUninstalled` listener
+- [x] **Input validation** — Boş satır, geçersiz URL, tekrarlayan girişler filtrelenmeli
+- [x] **Hata yönetimi** — `chrome.storage` çağrılarına error handling eklenmeli
+- [x] **Yorum satırındaki ölü kod temizliği** — `background.js:59-61` `onUninstalled` listener
 
 ## 4. UX / UI İyileştirmeleri
 
