@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background circle for better visibility at small sizes -->
+  <circle cx="64" cy="64" r="60" fill="#1976D2"/>
+  <!-- Shield shape -->
+  <path d="M64 18 L28 34 V62 C28 88 64 110 64 110 S100 88 100 62 V34 Z" fill="white" opacity="0.95"/>
+  <!-- Block/prohibition circle -->
+  <circle cx="64" cy="62" r="22" fill="none" stroke="#1976D2" stroke-width="6"/>
+  <!-- Diagonal line -->
+  <line x1="48" y1="46" x2="80" y2="78" stroke="#1976D2" stroke-width="6" stroke-linecap="round"/>
+</svg>

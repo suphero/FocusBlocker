@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#9E9E9E"/>
+  <!-- Shield shape -->
+  <path d="M64 18 L28 34 V62 C28 88 64 110 64 110 S100 88 100 62 V34 Z" fill="white" opacity="0.85"/>
+  <!-- Horizontal line (pause/off indicator) -->
+  <line x1="44" y1="62" x2="84" y2="62" stroke="#9E9E9E" stroke-width="8" stroke-linecap="round"/>
+</svg>
