@@ -10,16 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - name: Build
+          node-version: 22
+      - name: Build & ZIP
         run: |
           npm install
-          npm run build
-      - name: Create ZIP
-        run: zip -r extension.zip dist/
+          make zip
       - name: Upload & release
         uses: mnao305/chrome-extension-upload@v4.0.1
         with:

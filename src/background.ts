@@ -1,7 +1,11 @@
-function redirectIfBlocked(tab, blockedWebsites) {
+import { isDomainBlocked, isValidHttpUrl } from "./url-utils";
+
+function redirectIfBlocked(tab: chrome.tabs.Tab, blockedWebsites: string[]): void {
+  if (!tab.url || !tab.id) return;
+
   const tabUrl = new URL(tab.url);
   const isBlockedSite = blockedWebsites.some((website) =>
-    tabUrl.host === website || tabUrl.host.endsWith("." + website)
+    isDomainBlocked(tabUrl.host, website),
   );
 
   if (isBlockedSite) {
@@ -13,9 +17,9 @@ function redirectIfBlocked(tab, blockedWebsites) {
   }
 }
 
-// redirectIfUnblocked will be given a tab and will see if the tab is on the blocked.html site.
-// If it is, it will redirect the tab to the original url which can be found in the query params.
-function redirectIfUnblocked(tab) {
+function redirectIfUnblocked(tab: chrome.tabs.Tab): void {
+  if (!tab.url || !tab.id) return;
+
   const tabUrl = new URL(tab.url);
   const blockedExtensionUrl = chrome.runtime.getURL("blocked.html");
   const isBlockedSite = tabUrl.href.includes(blockedExtensionUrl);
@@ -25,72 +29,70 @@ function redirectIfUnblocked(tab) {
     const originalUrl = params.get("url");
     if (originalUrl) {
       const decodedUrl = decodeURIComponent(originalUrl);
-      try {
-        const url = new URL(decodedUrl);
-        if (url.protocol === "http:" || url.protocol === "https:") {
-          chrome.tabs.update(tab.id, { url: decodedUrl });
-        }
-      } catch {
-        // Invalid URL, do not redirect
+      if (isValidHttpUrl(decodedUrl)) {
+        chrome.tabs.update(tab.id, { url: decodedUrl });
       }
     }
   }
 }
 
-const onActivatedListener = async function (activeInfo) {
+const onActivatedListener = async (activeInfo: chrome.tabs.OnActivatedInfo): Promise<void> => {
   const tab = await chrome.tabs.get(activeInfo.tabId);
   redirectIfEnabled(tab);
 };
 
-const onUpdatedListener = async function (_tabId, _changeInfo, tab) {
+const onUpdatedListener = async (
+  _tabId: number,
+  _changeInfo: chrome.tabs.OnUpdatedInfo,
+  tab: chrome.tabs.Tab,
+): Promise<void> => {
   redirectIfEnabled(tab);
 };
 
-const redirectIfEnabled = async function (tab) {
+const redirectIfEnabled = async (tab: chrome.tabs.Tab): Promise<void> => {
   const result = await chrome.storage.local.get(["enabled", "websites"]);
   if (!result || !result.websites || !result.enabled) {
     return;
   }
-  redirectIfBlocked(tab, result.websites);
+  redirectIfBlocked(tab, result.websites as string[]);
 };
 
 chrome.tabs.onActivated.addListener(onActivatedListener);
 chrome.tabs.onUpdated.addListener(onUpdatedListener);
 
-chrome.runtime.onInstalled.addListener(function (details) {
+chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    chrome.storage.local.set({ enabled: false, websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"] });
+    chrome.storage.local.set({
+      enabled: false,
+      websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"],
+    });
   }
 });
 
-// chrome.runtime.onUninstalled.addListener(function () {
-//   chrome.storage.local.clear();
-// });
-
-async function getCurrentTab() {
-  let queryOptions = { active: true, lastFocusedWindow: true };
-  // `tab` will either be a `tabs.Tab` instance or `undefined`.
-  let [tab] = await chrome.tabs.query(queryOptions);
+async function getCurrentTab(): Promise<chrome.tabs.Tab | undefined> {
+  const queryOptions = { active: true, lastFocusedWindow: true };
+  const [tab] = await chrome.tabs.query(queryOptions);
   return tab;
 }
 
-chrome.storage.onChanged.addListener(async function (changes) {
+chrome.storage.onChanged.addListener(async (changes) => {
   if (changes.enabled) {
     if (changes.enabled.newValue) {
       const result = await chrome.storage.local.get(["websites"]);
       const tab = await getCurrentTab();
-      redirectIfBlocked(tab, result.websites);
-      
+      if (tab) {
+        redirectIfBlocked(tab, result.websites as string[]);
+      }
+
       chrome.action.setIcon({
         path: {
           "16": "images/enabled16.png",
           "32": "images/enabled32.png",
           "48": "images/enabled48.png",
-          "128": "images/enabled128.png"
-        }
+          "128": "images/enabled128.png",
+        },
       });
     } else {
-      // Disabled focus mode, redirect sites back to their original unblocked state.
       chrome.tabs.query({}, (tabs) => {
         tabs.forEach((tab) => {
           redirectIfUnblocked(tab);
@@ -102,8 +104,8 @@ chrome.storage.onChanged.addListener(async function (changes) {
           "16": "images/disabled16.png",
           "32": "images/disabled32.png",
           "48": "images/disabled48.png",
-          "128": "images/disabled128.png"
-        }
+          "128": "images/disabled128.png",
+        },
       });
     }
   }

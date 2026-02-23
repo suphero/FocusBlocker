@@ -13,15 +13,15 @@
 
 ## 2. Build & Altyapı Modernizasyonu
 
-- [ ] **Bundler güncellemesi** — `parcel-bundler@1.x` (2019) → Parcel 2.x veya Vite
-- [ ] **TypeScript geçişi** — Vanilla JS → TypeScript
-- [ ] **Lint & Format** — ESLint + Prettier eklenmeli
-- [ ] **Test altyapısı** — Vitest veya Jest eklenmeli
-- [ ] **CI/CD güncellemesi**
-  - Node 16 (EOL) → Node 20 veya 22
+- [x] **Bundler güncellemesi** — `parcel-bundler@1.x` (2019) → Vite 7
+- [x] **TypeScript geçişi** — Vanilla JS → TypeScript
+- [x] **Lint & Format** — ESLint + Prettier eklendi
+- [x] **Test altyapısı** — Vitest eklendi (url-utils testleri mevcut)
+- [x] **CI/CD güncellemesi**
+  - Node 16 (EOL) → Node 22
   - `actions/checkout@v1` → `@v4`
   - `actions/setup-node@v1` → `@v4`
-- [ ] **`dist/` klasörü `.gitignore`'a eklenmeli** — Build artifact'ları repoda tutulmamalı
+- [x] **`dist/` klasörü `.gitignore`'da** — Zaten mevcut
 
 ## 3. Kod Kalitesi
 
