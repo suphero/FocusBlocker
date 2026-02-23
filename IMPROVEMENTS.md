@@ -1,0 +1,60 @@
+# Focus Blocker - İyileştirme Yol Haritası
+
+## 1. Güvenlik Düzeltmeleri
+
+- [x] **URL eşleştirme zafiyeti** — `background.js:3`
+  - `tabUrl.host.includes(website)` loose matching tehlikeli
+  - `not-facebook.com` veya `facebook.com.evil.com` gibi siteler yanlışlıkla eşleşiyor
+  - Exact domain veya subdomain matching yapılmalı
+- [x] **Blocked page open redirect riski** — `blocked.js:6`
+  - Query param'dan gelen URL doğrudan link olarak set ediliyor
+  - `javascript:` veya başka protocol ile kötüye kullanılabilir
+  - URL validasyonu eklenmeli
+
+## 2. Build & Altyapı Modernizasyonu
+
+- [ ] **Bundler güncellemesi** — `parcel-bundler@1.x` (2019) → Parcel 2.x veya Vite
+- [ ] **TypeScript geçişi** — Vanilla JS → TypeScript
+- [ ] **Lint & Format** — ESLint + Prettier eklenmeli
+- [ ] **Test altyapısı** — Vitest veya Jest eklenmeli
+- [ ] **CI/CD güncellemesi**
+  - Node 16 (EOL) → Node 20 veya 22
+  - `actions/checkout@v1` → `@v4`
+  - `actions/setup-node@v1` → `@v4`
+- [ ] **`dist/` klasörü `.gitignore`'a eklenmeli** — Build artifact'ları repoda tutulmamalı
+
+## 3. Kod Kalitesi
+
+- [ ] **Input validation** — Boş satır, geçersiz URL, tekrarlayan girişler filtrelenmeli
+- [ ] **Hata yönetimi** — `chrome.storage` çağrılarına error handling eklenmeli
+- [ ] **Yorum satırındaki ölü kod temizliği** — `background.js:59-61` `onUninstalled` listener
+
+## 4. UX / UI İyileştirmeleri
+
+- [ ] **Save sonrası geri bildirim** — Popup kapanmadan önce "Kaydedildi" mesajı
+- [ ] **Toggle label** — "Odak Modu Aktif/Pasif" yazısı eklenmeli
+- [ ] **Blocked page styling** — `blocked.html` hiç CSS içermiyor, tasarım eklenmeli
+- [ ] **Popup UI yenileme** — Textarea yerine chip/tag tarzı site listesi
+- [ ] **Dark mode** — Popup ve blocked page için karanlık tema desteği
+
+## 5. Yeni Özellikler — Yüksek Etki
+
+- [ ] **Pomodoro / Zamanlayıcı** — "25 dk odaklan, 5 dk mola" zaman bazlı bloklama
+- [ ] **Zaman planlaması** — Belirli gün ve saatlerde otomatik aktifleştirme (ör. hafta içi 09:00-17:00)
+- [ ] **Şifre koruması** — Ayarları değiştirmek için şifre gerekliliği
+- [ ] **Kategori / Grup** — "Sosyal medya", "Haberler" gibi gruplar halinde toplu engelleme
+- [ ] **İstatistikler** — Kaç kez engellendiği, hangi sitelere en çok gitmeye çalışıldığı
+
+## 6. Yeni Özellikler — Orta Etki
+
+- [ ] **Import / Export** — Ayarları JSON olarak dışa/içe aktarma
+- [ ] **Wildcard desteği** — `*.reddit.com` gibi pattern matching
+- [ ] **Keyboard shortcuts** — Hızlı toggle için kısayol tuşları
+- [ ] **Site başına silme** — Listeden tek tek site kaldırabilme
+
+## 7. Yeni Özellikler — Profesyonellik
+
+- [ ] **Onboarding** — İlk kurulumda adım adım rehber
+- [ ] **Bildirimler** — Engelleme aktifken hatırlatma bildirimleri
+- [ ] **Whitelist modu** — Sadece belirli sitelere izin ver, geri kalanını engelle
+- [ ] **Çoklu dil desteği (i18n)** — Chrome'un `_locales` API'si ile

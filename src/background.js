@@ -1,7 +1,7 @@
 function redirectIfBlocked(tab, blockedWebsites) {
   const tabUrl = new URL(tab.url);
   const isBlockedSite = blockedWebsites.some((website) =>
-    tabUrl.host.includes(website)
+    tabUrl.host === website || tabUrl.host.endsWith("." + website)
   );
 
   if (isBlockedSite) {
@@ -25,7 +25,14 @@ function redirectIfUnblocked(tab) {
     const originalUrl = params.get("url");
     if (originalUrl) {
       const decodedUrl = decodeURIComponent(originalUrl);
-      chrome.tabs.update(tab.id, { url: decodedUrl });
+      try {
+        const url = new URL(decodedUrl);
+        if (url.protocol === "http:" || url.protocol === "https:") {
+          chrome.tabs.update(tab.id, { url: decodedUrl });
+        }
+      } catch {
+        // Invalid URL, do not redirect
+      }
     }
   }
 }
