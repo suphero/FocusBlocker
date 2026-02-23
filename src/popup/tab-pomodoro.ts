@@ -1,5 +1,6 @@
 import { getStorage, setStorage } from "../storage";
 import type { PomodoroPhase, PomodoroState } from "../types";
+import { t } from "../i18n-utils";
 
 let phase: PomodoroPhase = "idle";
 let endTime: number | null = null;
@@ -12,10 +13,10 @@ let countdownInterval: ReturnType<typeof setInterval> | null = null;
 
 function getPhaseLabel(p: PomodoroPhase): string {
   switch (p) {
-    case "idle": return "Ready";
-    case "focus": return "Focus";
-    case "shortBreak": return "Short Break";
-    case "longBreak": return "Long Break";
+    case "idle": return t("timerReady");
+    case "focus": return t("timerFocus");
+    case "shortBreak": return t("timerShortBreak");
+    case "longBreak": return t("timerLongBreak");
   }
 }
 
@@ -84,12 +85,12 @@ function updateButtons(): void {
   const resetBtn = document.getElementById("pomodoroReset") as HTMLButtonElement;
 
   if (phase === "idle") {
-    startBtn.textContent = "Start Focus";
+    startBtn.textContent = t("startFocus");
     startBtn.disabled = false;
     skipBtn.disabled = true;
     resetBtn.disabled = true;
   } else {
-    startBtn.textContent = "Running...";
+    startBtn.textContent = t("running");
     startBtn.disabled = true;
     skipBtn.disabled = false;
     resetBtn.disabled = false;

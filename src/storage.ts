@@ -1,8 +1,8 @@
-import type { StorageSchema, PomodoroState, PasswordState, StatsData } from "./types";
+import type { StorageSchema, PomodoroState, PasswordState, StatsData, NotificationSettings } from "./types";
 
 // ── Current schema version ──────────────────────
 
-const CURRENT_SCHEMA_VERSION = 2;
+const CURRENT_SCHEMA_VERSION = 3;
 
 // ── Default values ──────────────────────────────
 
@@ -29,17 +29,26 @@ const DEFAULT_STATS: StatsData = {
   daily: {},
 };
 
+const DEFAULT_NOTIFICATIONS: NotificationSettings = {
+  enabled: false,
+  intervalMinutes: 15,
+};
+
 export const STORAGE_DEFAULTS: StorageSchema = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
   enabled: false,
   websites: ["facebook.com", "x.com", "instagram.com", "youtube.com", "whatsapp.com"],
   enabledBy: null,
+  blockMode: "blacklist",
+  whitelist: [],
   pomodoro: DEFAULT_POMODORO,
   schedules: [],
   scheduleEnabled: false,
   password: DEFAULT_PASSWORD,
   categories: [],
   stats: DEFAULT_STATS,
+  notifications: DEFAULT_NOTIFICATIONS,
+  onboardingCompleted: false,
 };
 
 // ── Storage helpers ─────────────────────────────
@@ -78,7 +87,7 @@ export async function migrateStorage(reason: string): Promise<void> {
     return;
   }
 
-  // Upgrade from v1 (legacy) to v2
+  // Upgrade from older schema versions
   if (!result.schemaVersion || result.schemaVersion < CURRENT_SCHEMA_VERSION) {
     const migrated: Partial<StorageSchema> = {
       schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -89,6 +98,10 @@ export async function migrateStorage(reason: string): Promise<void> {
       password: result.password ?? DEFAULT_PASSWORD,
       categories: result.categories ?? [],
       stats: result.stats ?? DEFAULT_STATS,
+      blockMode: result.blockMode ?? "blacklist",
+      whitelist: result.whitelist ?? [],
+      notifications: result.notifications ?? DEFAULT_NOTIFICATIONS,
+      onboardingCompleted: true, // existing users skip onboarding
     };
     await chrome.storage.local.set(migrated);
   }

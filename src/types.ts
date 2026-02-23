@@ -57,6 +57,17 @@ export interface StatsData {
 
 export type EnabledBy = "manual" | "schedule" | "pomodoro" | null;
 
+// ── Block mode ─────────────────────────────────
+
+export type BlockMode = "blacklist" | "whitelist";
+
+// ── Notifications ──────────────────────────────
+
+export interface NotificationSettings {
+  enabled: boolean;
+  intervalMinutes: number;
+}
+
 // ── Full Storage Schema ─────────────────────────
 
 export interface StorageSchema {
@@ -66,6 +77,8 @@ export interface StorageSchema {
   enabled: boolean;
   websites: string[];
   enabledBy: EnabledBy;
+  blockMode: BlockMode;
+  whitelist: string[];
 
   // Features
   pomodoro: PomodoroState;
@@ -74,4 +87,6 @@ export interface StorageSchema {
   password: PasswordState;
   categories: Category[];
   stats: StatsData;
+  notifications: NotificationSettings;
+  onboardingCompleted: boolean;
 }

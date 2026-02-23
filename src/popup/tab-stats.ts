@@ -1,5 +1,6 @@
 import { getStorage, setStorage } from "../storage";
 import { aggregateStats, type StatsPeriod } from "../stats-utils";
+import { t } from "../i18n-utils";
 
 let currentPeriod: StatsPeriod = "today";
 
@@ -13,13 +14,13 @@ function renderStats(aggregated: Record<string, number>): void {
   // Total count
   const totalEl = document.createElement("div");
   totalEl.className = "stats-total";
-  totalEl.textContent = `${total} block${total !== 1 ? "s" : ""}`;
+  totalEl.textContent = total !== 1 ? t("blocksCount", String(total)) : t("blockSingular", String(total));
   container.appendChild(totalEl);
 
   if (entries.length === 0) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No blocked attempts yet.";
+    empty.textContent = t("noBlockedAttempts");
     container.appendChild(empty);
     return;
   }
@@ -70,7 +71,7 @@ async function loadAndRender(): Promise<void> {
 }
 
 async function resetStats(): Promise<void> {
-  if (!confirm("Reset all statistics?")) return;
+  if (!confirm(t("resetStatsConfirm"))) return;
   try {
     await setStorage({ stats: { daily: {} } });
     await loadAndRender();

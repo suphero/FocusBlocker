@@ -1,8 +1,9 @@
 {
-  "name": "Focus Blocker",
-  "version": "0.0.6",
+  "name": "__MSG_extName__",
+  "version": "1.0.0",
   "manifest_version": 3,
-  "description": "Block certain websites during designated focus times.",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "action": {
     "default_icon": {
       "16": "images/disabled16.png",

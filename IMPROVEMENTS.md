@@ -54,7 +54,7 @@
 
 ## 7. Yeni Özellikler — Profesyonellik
 
-- [ ] **Onboarding** — İlk kurulumda adım adım rehber
-- [ ] **Bildirimler** — Engelleme aktifken hatırlatma bildirimleri
-- [ ] **Whitelist modu** — Sadece belirli sitelere izin ver, geri kalanını engelle
-- [ ] **Çoklu dil desteği (i18n)** — Chrome'un `_locales` API'si ile
+- [x] **Onboarding** — İlk kurulumda adım adım rehber
+- [x] **Bildirimler** — Engelleme aktifken hatırlatma bildirimleri
+- [x] **Whitelist modu** — Sadece belirli sitelere izin ver, geri kalanını engelle
+- [x] **Çoklu dil desteği (i18n)** — Chrome'un `_locales` API'si ile

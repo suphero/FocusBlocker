@@ -1,10 +1,13 @@
 import { getStorage, setStorage } from "../storage";
 import type { Schedule } from "../types";
+import { t } from "../i18n-utils";
 
 let schedules: Schedule[] = [];
 let scheduleEnabled = false;
 
-const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+function getDayLabels(): string[] {
+  return [t("daySun"), t("dayMon"), t("dayTue"), t("dayWed"), t("dayThu"), t("dayFri"), t("daySat")];
+}
 
 function renderSchedules(): void {
   const container = document.getElementById("scheduleContent") as HTMLDivElement;
@@ -13,7 +16,7 @@ function renderSchedules(): void {
   if (schedules.length === 0) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No schedules yet. Add one to auto-block at specific times.";
+    empty.textContent = t("noSchedules");
     container.appendChild(empty);
     return;
   }
@@ -30,7 +33,7 @@ function renderSchedules(): void {
     labelInput.type = "text";
     labelInput.className = "schedule-label";
     labelInput.value = schedule.label;
-    labelInput.placeholder = "Schedule name";
+    labelInput.placeholder = t("scheduleNamePlaceholder");
     labelInput.addEventListener("change", () => {
       schedule.label = labelInput.value;
       saveSchedules();
@@ -56,7 +59,7 @@ function renderSchedules(): void {
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "schedule-delete";
     deleteBtn.textContent = "\u00d7";
-    deleteBtn.title = "Delete schedule";
+    deleteBtn.title = t("deleteSchedule");
     deleteBtn.addEventListener("click", () => deleteSchedule(schedule.id));
 
     actions.appendChild(toggle);
@@ -72,7 +75,7 @@ function renderSchedules(): void {
     for (let d = 0; d < 7; d++) {
       const dayBtn = document.createElement("button");
       dayBtn.className = "day-btn";
-      dayBtn.textContent = DAY_LABELS[d];
+      dayBtn.textContent = getDayLabels()[d];
       dayBtn.classList.toggle("active", schedule.days.includes(d));
       dayBtn.addEventListener("click", () => {
         if (schedule.days.includes(d)) {
@@ -127,7 +130,7 @@ function renderSchedules(): void {
 function addSchedule(): void {
   const newSchedule: Schedule = {
     id: crypto.randomUUID(),
-    label: "Schedule " + (schedules.length + 1),
+    label: t("scheduleDefault", String(schedules.length + 1)),
     days: [1, 2, 3, 4, 5], // Weekdays
     startTime: "09:00",
     endTime: "17:00",
@@ -155,7 +158,7 @@ async function saveSchedules(): Promise<void> {
 async function onMasterToggle(enabled: boolean): Promise<void> {
   scheduleEnabled = enabled;
   const label = document.getElementById("scheduleToggleLabel") as HTMLSpanElement;
-  label.textContent = enabled ? "Scheduling: ON" : "Scheduling: OFF";
+  label.textContent = enabled ? t("schedulingOn") : t("schedulingOff");
   label.classList.toggle("active", enabled);
   await saveSchedules();
 }
@@ -173,7 +176,7 @@ export async function initScheduleTab(): Promise<void> {
   const masterCheckbox = document.getElementById("scheduleEnabled") as HTMLInputElement;
   masterCheckbox.checked = scheduleEnabled;
   const label = document.getElementById("scheduleToggleLabel") as HTMLSpanElement;
-  label.textContent = scheduleEnabled ? "Scheduling: ON" : "Scheduling: OFF";
+  label.textContent = scheduleEnabled ? t("schedulingOn") : t("schedulingOff");
   label.classList.toggle("active", scheduleEnabled);
 
   masterCheckbox.addEventListener("change", () => {

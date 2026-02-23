@@ -3,6 +3,9 @@ import { initPomodoroTab } from "./popup/tab-pomodoro";
 import { initScheduleTab } from "./popup/tab-schedule";
 import { initCategoriesTab } from "./popup/tab-categories";
 import { initStatsTab } from "./popup/tab-stats";
+import { initSettingsTab } from "./popup/tab-settings";
+import { checkOnboarding } from "./popup/onboarding";
+import { localizeHtml } from "./i18n-utils";
 
 function initTabs(): void {
   const tabs = document.querySelectorAll<HTMLButtonElement>(".tab-btn");
@@ -27,6 +30,7 @@ function initTabs(): void {
 }
 
 async function init(): Promise<void> {
+  localizeHtml();
   initTabs();
 
   await Promise.all([
@@ -35,7 +39,11 @@ async function init(): Promise<void> {
     initScheduleTab(),
     initCategoriesTab(),
     initStatsTab(),
+    initSettingsTab(refreshBlockerChips),
   ]);
+
+  // Show onboarding for first-time users (after tabs are ready)
+  await checkOnboarding();
 }
 
 document.addEventListener("DOMContentLoaded", init);

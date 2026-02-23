@@ -2,6 +2,15 @@ import { getStorage, setStorage } from "../storage";
 import { extractDomain } from "../url-utils";
 import { DEFAULT_CATEGORIES } from "../category-defaults";
 import type { Category } from "../types";
+import { t } from "../i18n-utils";
+
+const BUILTIN_CAT_KEYS: Record<string, string> = {
+  social: "catSocial",
+  news: "catNews",
+  entertainment: "catEntertainment",
+  shopping: "catShopping",
+  gaming: "catGaming",
+};
 
 let categories: Category[] = [];
 
@@ -12,7 +21,7 @@ function renderCategories(): void {
   if (categories.length === 0) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.textContent = "No categories yet.";
+    empty.textContent = t("noCategories");
     container.appendChild(empty);
     return;
   }
@@ -34,7 +43,7 @@ function renderCategories(): void {
 
     const name = document.createElement("span");
     name.className = "category-name";
-    name.textContent = cat.name;
+    name.textContent = cat.isBuiltIn && BUILTIN_CAT_KEYS[cat.id] ? t(BUILTIN_CAT_KEYS[cat.id]) : cat.name;
 
     const count = document.createElement("span");
     count.className = "category-count";
@@ -63,7 +72,7 @@ function renderCategories(): void {
     const chevron = document.createElement("button");
     chevron.className = "category-chevron";
     chevron.textContent = "\u25B6";
-    chevron.title = "Expand";
+    chevron.title = t("expand");
     chevron.addEventListener("click", () => {
       const body = card.querySelector(".category-body") as HTMLDivElement;
       const isOpen = body.classList.toggle("open");
@@ -75,7 +84,7 @@ function renderCategories(): void {
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "category-delete";
       deleteBtn.textContent = "\u00d7";
-      deleteBtn.title = "Delete category";
+      deleteBtn.title = t("deleteCategory");
       deleteBtn.addEventListener("click", () => deleteCategory(cat.id));
       right.appendChild(deleteBtn);
     }
@@ -112,7 +121,7 @@ function renderCategories(): void {
     addRow.className = "add-site add-site-sm";
     const input = document.createElement("input");
     input.type = "text";
-    input.placeholder = "Add site...";
+    input.placeholder = t("addSiteToCategoryPlaceholder");
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.addEventListener("click", () => {

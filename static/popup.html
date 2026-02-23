@@ -2,32 +2,36 @@
 <html lang="en">
 
 <head>
-    <title>Focus Blocker</title>
+    <title>__MSG_extName__</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 
 <body>
     <!-- Tab bar -->
     <nav class="tab-bar">
-        <button class="tab-btn active" data-tab="blocker" title="Block">
+        <button class="tab-btn active" data-tab="blocker" title="__MSG_tabBlock__">
             <span class="tab-icon">&#x1F6E1;</span>
-            <span class="tab-label">Block</span>
+            <span class="tab-label">__MSG_tabBlock__</span>
         </button>
-        <button class="tab-btn" data-tab="timer" title="Timer">
+        <button class="tab-btn" data-tab="timer" title="__MSG_tabTimer__">
             <span class="tab-icon">&#x23F1;</span>
-            <span class="tab-label">Timer</span>
+            <span class="tab-label">__MSG_tabTimer__</span>
         </button>
-        <button class="tab-btn" data-tab="schedule" title="Schedule">
+        <button class="tab-btn" data-tab="schedule" title="__MSG_tabSchedule__">
             <span class="tab-icon">&#x1F4C5;</span>
-            <span class="tab-label">Schedule</span>
+            <span class="tab-label">__MSG_tabSchedule__</span>
         </button>
-        <button class="tab-btn" data-tab="groups" title="Groups">
+        <button class="tab-btn" data-tab="groups" title="__MSG_tabGroups__">
             <span class="tab-icon">&#x1F4C1;</span>
-            <span class="tab-label">Groups</span>
+            <span class="tab-label">__MSG_tabGroups__</span>
         </button>
-        <button class="tab-btn" data-tab="stats" title="Stats">
+        <button class="tab-btn" data-tab="stats" title="__MSG_tabStats__">
             <span class="tab-icon">&#x1F4CA;</span>
-            <span class="tab-label">Stats</span>
+            <span class="tab-label">__MSG_tabStats__</span>
+        </button>
+        <button class="tab-btn" data-tab="settings" title="__MSG_tabSettings__">
+            <span class="tab-icon">&#x2699;</span>
+            <span class="tab-label">__MSG_tabSettings__</span>
         </button>
     </nav>
 
@@ -38,36 +42,26 @@
                 <input id="enabled" type="checkbox">
                 <span class="slider"></span>
             </label>
-            <span id="toggleLabel" class="toggle-label">Focus Mode: OFF</span>
+            <span id="toggleLabel" class="toggle-label">__MSG_focusModeOff__</span>
         </div>
-        <span class="section-label">Blocked Websites</span>
-        <div id="chipList" class="chip-list"></div>
-        <div class="add-site">
-            <input id="siteInput" type="text" placeholder="example.com">
-            <button id="addBtn" type="button">Add</button>
+        <div class="mode-toggle">
+            <button id="blacklistModeBtn" class="mode-btn active" data-mode="blacklist">__MSG_blacklistMode__</button>
+            <button id="whitelistModeBtn" class="mode-btn" data-mode="whitelist">__MSG_whitelistMode__</button>
         </div>
-        <div class="data-section">
-            <span class="section-label">Data</span>
-            <div class="data-actions">
-                <button id="exportBtn" class="btn-secondary" type="button">Export</button>
-                <button id="importBtn" class="btn-secondary" type="button">Import</button>
-                <input id="importFile" type="file" accept=".json" class="hidden">
+        <div id="blacklistSection">
+            <span class="section-label">__MSG_blockedWebsites__</span>
+            <div id="chipList" class="chip-list"></div>
+            <div class="add-site">
+                <input id="siteInput" type="text" placeholder="__MSG_addSitePlaceholder__">
+                <button id="addBtn" type="button">__MSG_addBtn__</button>
             </div>
-            <div id="dataFeedback" class="data-feedback hidden"></div>
         </div>
-
-        <div class="password-section">
-            <span class="section-label">Password Protection</span>
-            <div id="unlockCountdown" class="unlock-countdown hidden"></div>
-            <div class="password-actions">
-                <button id="setPasswordBtn" class="btn-secondary" type="button">Set Password</button>
-                <button id="removePasswordBtn" class="btn-danger-sm hidden" type="button">Remove</button>
-            </div>
-            <div id="passwordSetupForm" class="password-setup-form">
-                <input id="newPassword1" type="password" placeholder="New password">
-                <input id="newPassword2" type="password" placeholder="Confirm password">
-                <div id="pwSetupError" class="error hidden"></div>
-                <button id="savePasswordBtn" type="button">Save Password</button>
+        <div id="whitelistSection" class="hidden">
+            <span class="section-label">__MSG_allowedWebsites__</span>
+            <div id="whitelistChipList" class="chip-list"></div>
+            <div class="add-site">
+                <input id="whitelistInput" type="text" placeholder="__MSG_addSitePlaceholder__">
+                <button id="whitelistAddBtn" type="button">__MSG_addBtn__</button>
             </div>
         </div>
     </div>
@@ -78,14 +72,14 @@
             <div id="progressRing" class="progress-ring" style="--progress: 0">
                 <div class="progress-inner">
                     <div id="timerText" class="timer-text">25:00</div>
-                    <div id="phaseLabel" class="phase-label">Ready</div>
+                    <div id="phaseLabel" class="phase-label">__MSG_timerReady__</div>
                 </div>
             </div>
             <div id="sessionDots" class="session-dots"></div>
             <div class="pomodoro-actions">
-                <button id="pomodoroStart" class="btn-primary" type="button">Start Focus</button>
-                <button id="pomodoroSkip" class="btn-secondary" type="button" disabled>Skip</button>
-                <button id="pomodoroReset" class="btn-secondary" type="button" disabled>Reset</button>
+                <button id="pomodoroStart" class="btn-primary" type="button">__MSG_startFocus__</button>
+                <button id="pomodoroSkip" class="btn-secondary" type="button" disabled>__MSG_skipBtn__</button>
+                <button id="pomodoroReset" class="btn-secondary" type="button" disabled>__MSG_resetBtn__</button>
             </div>
         </div>
     </div>
@@ -97,42 +91,105 @@
                 <input id="scheduleEnabled" type="checkbox">
                 <span class="slider"></span>
             </label>
-            <span id="scheduleToggleLabel" class="toggle-label">Scheduling: OFF</span>
+            <span id="scheduleToggleLabel" class="toggle-label">__MSG_schedulingOff__</span>
         </div>
         <div id="scheduleContent"></div>
-        <button id="addScheduleBtn" class="btn-add" type="button">+ Add Schedule</button>
+        <button id="addScheduleBtn" class="btn-add" type="button">__MSG_addSchedule__</button>
     </div>
 
     <!-- ═══ Categories Tab ═══ -->
     <div id="tab-groups" class="tab-panel">
-        <span class="section-label">Categories</span>
+        <span class="section-label">__MSG_categories__</span>
         <div id="categoriesContent"></div>
-        <button id="addCategoryBtn" class="btn-add" type="button">+ Custom Category</button>
+        <button id="addCategoryBtn" class="btn-add" type="button">__MSG_addCustomCategory__</button>
         <div id="addCategoryForm" class="add-category-form">
             <input id="newCatIcon" type="text" placeholder="&#x1F4C1;" maxlength="2" class="icon-input">
-            <input id="newCatName" type="text" placeholder="Category name">
-            <button id="saveCategoryBtn" type="button">Add</button>
+            <input id="newCatName" type="text" placeholder="__MSG_categoryNamePlaceholder__">
+            <button id="saveCategoryBtn" type="button">__MSG_addBtn__</button>
         </div>
     </div>
 
     <!-- ═══ Stats Tab ═══ -->
     <div id="tab-stats" class="tab-panel">
         <div class="stats-period">
-            <button class="stats-period-btn active" data-period="today">Today</button>
-            <button class="stats-period-btn" data-period="week">Week</button>
-            <button class="stats-period-btn" data-period="month">Month</button>
+            <button class="stats-period-btn active" data-period="today">__MSG_periodToday__</button>
+            <button class="stats-period-btn" data-period="week">__MSG_periodWeek__</button>
+            <button class="stats-period-btn" data-period="month">__MSG_periodMonth__</button>
         </div>
         <div id="statsContent"></div>
-        <button id="resetStats" class="btn-danger-sm" type="button">Reset Stats</button>
+        <button id="resetStats" class="btn-danger-sm" type="button">__MSG_resetStats__</button>
+    </div>
+
+    <!-- ═══ Settings Tab ═══ -->
+    <div id="tab-settings" class="tab-panel">
+        <div class="password-section">
+            <span class="section-label">__MSG_passwordProtection__</span>
+            <div id="unlockCountdown" class="unlock-countdown hidden"></div>
+            <div class="password-actions">
+                <button id="setPasswordBtn" class="btn-secondary" type="button">__MSG_setPassword__</button>
+                <button id="removePasswordBtn" class="btn-danger-sm hidden" type="button">__MSG_removePassword__</button>
+            </div>
+            <div id="passwordSetupForm" class="password-setup-form">
+                <input id="newPassword1" type="password" placeholder="__MSG_newPasswordPlaceholder__">
+                <input id="newPassword2" type="password" placeholder="__MSG_confirmPasswordPlaceholder__">
+                <div id="pwSetupError" class="error hidden"></div>
+                <button id="savePasswordBtn" type="button">__MSG_savePassword__</button>
+            </div>
+        </div>
+        <div class="notification-section">
+            <span class="section-label">__MSG_reminders__</span>
+            <div class="toggle-row toggle-row-compact">
+                <label class="switch switch-sm" for="notifEnabled">
+                    <input id="notifEnabled" type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span id="notifToggleLabel" class="toggle-label">__MSG_remindersOff__</span>
+            </div>
+            <div id="notifIntervalRow" class="interval-row hidden">
+                <label for="notifInterval" class="interval-label">__MSG_every__</label>
+                <select id="notifInterval" class="interval-select">
+                    <option value="5">__MSG_min5__</option>
+                    <option value="10">__MSG_min10__</option>
+                    <option value="15" selected>__MSG_min15__</option>
+                    <option value="30">__MSG_min30__</option>
+                    <option value="60">__MSG_min60__</option>
+                </select>
+            </div>
+        </div>
+        <div class="data-section">
+            <span class="section-label">__MSG_dataSection__</span>
+            <div class="data-actions">
+                <button id="exportBtn" class="btn-secondary" type="button">__MSG_exportBtn__</button>
+                <button id="importBtn" class="btn-secondary" type="button">__MSG_importBtn__</button>
+                <input id="importFile" type="file" accept=".json" class="hidden">
+            </div>
+            <div id="dataFeedback" class="data-feedback hidden"></div>
+        </div>
+        <button id="showOnboardingBtn" class="btn-add" type="button">__MSG_showOnboarding__</button>
     </div>
 
     <!-- ═══ Password Modal ═══ -->
     <div id="passwordModal" class="modal-overlay hidden">
         <div class="modal">
-            <h2>Enter Password</h2>
-            <input id="passwordInput" type="password" placeholder="Password">
-            <div id="passwordError" class="error hidden">Incorrect password</div>
-            <button id="passwordSubmit" type="button">Unlock</button>
+            <h2>__MSG_enterPassword__</h2>
+            <input id="passwordInput" type="password" placeholder="__MSG_passwordPlaceholder__">
+            <div id="passwordError" class="error hidden">__MSG_incorrectPassword__</div>
+            <button id="passwordSubmit" type="button">__MSG_unlockBtn__</button>
+        </div>
+    </div>
+
+    <!-- ═══ Onboarding Overlay ═══ -->
+    <div id="onboardingOverlay" class="modal-overlay hidden">
+        <div class="onboarding-modal">
+            <div id="onboardingIcon" class="onboarding-icon"></div>
+            <h2 id="onboardingTitle" class="onboarding-title"></h2>
+            <p id="onboardingDesc" class="onboarding-desc"></p>
+            <div id="onboardingIndicator" class="onboarding-indicator"></div>
+            <div class="onboarding-actions">
+                <button id="onboardingPrev" class="btn-secondary hidden" type="button">__MSG_onboardingBack__</button>
+                <button id="onboardingNext" class="btn-primary" type="button">__MSG_onboardingNext__</button>
+            </div>
+            <button id="onboardingSkip" class="onboarding-skip" type="button">__MSG_onboardingSkip__</button>
         </div>
     </div>
 

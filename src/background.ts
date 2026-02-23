@@ -1,8 +1,9 @@
-import { isDomainBlocked, isValidHttpUrl } from "./url-utils";
+import { isDomainBlocked, isDomainWhitelisted, isValidHttpUrl } from "./url-utils";
 import { getStorage, setStorage, getEffectiveBlockList, migrateStorage } from "./storage";
 import { pruneOldStats } from "./stats-utils";
 import { isWithinSchedule } from "./schedule-utils";
 import { getNextPhase } from "./pomodoro-logic";
+import { t } from "./i18n-utils";
 
 function redirectIfBlocked(tab: chrome.tabs.Tab, blockedWebsites: string[]): void {
   if (!tab.url || !tab.id) return;
@@ -21,6 +22,27 @@ function redirectIfBlocked(tab: chrome.tabs.Tab, blockedWebsites: string[]): voi
 
     // Track stat (fire-and-forget)
     trackBlockedStat(blockedDomain);
+  }
+}
+
+function redirectIfNotWhitelisted(tab: chrome.tabs.Tab, whitelist: string[]): void {
+  if (!tab.url || !tab.id) return;
+
+  let tabUrl: URL;
+  try {
+    tabUrl = new URL(tab.url);
+  } catch {
+    return;
+  }
+
+  // Only filter HTTP(S) pages — skip chrome://, extension pages, etc.
+  if (!tabUrl.protocol.startsWith("http")) return;
+
+  if (!isDomainWhitelisted(tabUrl.host, whitelist)) {
+    const blockedUrl = encodeURIComponent(tab.url);
+    const redirectUrl = chrome.runtime.getURL("blocked.html") + "?url=" + blockedUrl;
+    chrome.tabs.update(tab.id, { url: redirectUrl });
+    trackBlockedStat(tabUrl.host);
   }
 }
 
@@ -73,9 +95,14 @@ const redirectIfEnabled = async (tab: chrome.tabs.Tab): Promise<void> => {
   try {
     const data = await getStorage();
     if (!data.enabled) return;
-    const blockList = getEffectiveBlockList(data);
-    if (blockList.length === 0) return;
-    redirectIfBlocked(tab, blockList);
+
+    if (data.blockMode === "whitelist") {
+      redirectIfNotWhitelisted(tab, data.whitelist);
+    } else {
+      const blockList = getEffectiveBlockList(data);
+      if (blockList.length === 0) return;
+      redirectIfBlocked(tab, blockList);
+    }
   } catch (error) {
     console.error("Failed to read storage:", error);
   }
@@ -130,6 +157,10 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (alarm.name === "pomodoro-tick") {
     await handlePomodoroTick();
   }
+
+  if (alarm.name === "focus-reminder") {
+    await handleFocusReminder();
+  }
 });
 
 async function handlePomodoroEnd(): Promise<void> {
@@ -143,10 +174,10 @@ async function handlePomodoroEnd(): Promise<void> {
 
     // Notification
     const messages: Record<string, { title: string; message: string }> = {
-      shortBreak: { title: "Focus Complete!", message: "Time for a short break." },
-      longBreak: { title: "Great work!", message: "Time for a long break. You've earned it!" },
-      focus: { title: "Break Over!", message: "Time to focus again." },
-      idle: { title: "Session Complete!", message: "All sessions done. Great work!" },
+      shortBreak: { title: t("focusCompleteTitle"), message: t("focusCompleteMsg") },
+      longBreak: { title: t("greatWorkTitle"), message: t("greatWorkMsg") },
+      focus: { title: t("breakOverTitle"), message: t("breakOverMsg") },
+      idle: { title: t("sessionCompleteTitle"), message: t("sessionCompleteMsg") },
     };
     const msg = messages[nextPhase] || messages.idle;
     chrome.notifications.create("pomodoro-" + Date.now(), {
@@ -236,6 +267,53 @@ async function handleScheduleCheck(): Promise<void> {
   }
 }
 
+// ── Focus reminder notifications ────────────────
+
+function getReminderMessages(): string[] {
+  return [
+    t("focusReminder1"),
+    t("focusReminder2"),
+    t("focusReminder3"),
+    t("focusReminder4"),
+  ];
+}
+
+async function handleFocusReminder(): Promise<void> {
+  try {
+    const data = await getStorage();
+    if (!data.enabled || !data.notifications.enabled) {
+      chrome.alarms.clear("focus-reminder");
+      return;
+    }
+
+    const messages = getReminderMessages();
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    chrome.notifications.create("focus-reminder-" + Date.now(), {
+      type: "basic",
+      iconUrl: "images/logo128.png",
+      title: t("focusReminderTitle"),
+      message,
+    });
+  } catch (error) {
+    console.error("Failed to send focus reminder:", error);
+  }
+}
+
+async function syncFocusReminderAlarm(): Promise<void> {
+  try {
+    const data = await getStorage();
+    if (data.enabled && data.notifications.enabled) {
+      chrome.alarms.create("focus-reminder", {
+        periodInMinutes: data.notifications.intervalMinutes,
+      });
+    } else {
+      chrome.alarms.clear("focus-reminder");
+    }
+  } catch (error) {
+    console.error("Failed to sync focus reminder alarm:", error);
+  }
+}
+
 // ── Keyboard shortcuts ──────────────────────────
 
 const UNLOCK_DURATION = 5 * 60 * 1000; // must match password-modal.ts
@@ -259,8 +337,8 @@ chrome.commands.onCommand.addListener(async (command) => {
         chrome.notifications.create("shortcut-locked-" + Date.now(), {
           type: "basic",
           iconUrl: "images/logo128.png",
-          title: "Password Required",
-          message: "Open the popup to enter your password first.",
+          title: t("passwordRequiredTitle"),
+          message: t("passwordRequiredMsg"),
         });
         return;
       }
@@ -291,6 +369,7 @@ async function syncIcon(): Promise<void> {
   }
 }
 syncIcon();
+syncFocusReminderAlarm();
 
 // ── Icon & unblock on toggle ────────────────────
 
@@ -305,10 +384,14 @@ chrome.storage.onChanged.addListener(async (changes) => {
     if (changes.enabled.newValue) {
       try {
         const data = await getStorage();
-        const blockList = getEffectiveBlockList(data);
         const tab = await getCurrentTab();
         if (tab) {
-          redirectIfBlocked(tab, blockList);
+          if (data.blockMode === "whitelist") {
+            redirectIfNotWhitelisted(tab, data.whitelist);
+          } else {
+            const blockList = getEffectiveBlockList(data);
+            redirectIfBlocked(tab, blockList);
+          }
         }
       } catch (error) {
         console.error("Failed to read storage:", error);
@@ -322,6 +405,8 @@ chrome.storage.onChanged.addListener(async (changes) => {
           "128": "images/enabled128.png",
         },
       });
+
+      syncFocusReminderAlarm();
     } else {
       chrome.tabs.query({}, (tabs) => {
         tabs.forEach((tab) => {
@@ -337,6 +422,12 @@ chrome.storage.onChanged.addListener(async (changes) => {
           "128": "images/disabled128.png",
         },
       });
+
+      chrome.alarms.clear("focus-reminder");
     }
+  }
+
+  if (changes.notifications) {
+    syncFocusReminderAlarm();
   }
 });

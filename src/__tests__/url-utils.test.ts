@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isDomainBlocked, isValidHttpUrl, extractDomain, sanitizeWebsiteList } from "../url-utils";
+import { isDomainBlocked, isDomainWhitelisted, isValidHttpUrl, extractDomain, sanitizeWebsiteList } from "../url-utils";
 
 describe("isDomainBlocked", () => {
   it("should match exact domain", () => {
@@ -116,6 +116,28 @@ describe("extractDomain", () => {
 
   it("should reject wildcard with single label", () => {
     expect(extractDomain("*.com")).toBeNull();
+  });
+});
+
+describe("isDomainWhitelisted", () => {
+  it("should match exact domain in whitelist", () => {
+    expect(isDomainWhitelisted("google.com", ["google.com", "github.com"])).toBe(true);
+  });
+
+  it("should match subdomain in whitelist", () => {
+    expect(isDomainWhitelisted("mail.google.com", ["google.com"])).toBe(true);
+  });
+
+  it("should return false for unlisted domain", () => {
+    expect(isDomainWhitelisted("facebook.com", ["google.com", "github.com"])).toBe(false);
+  });
+
+  it("should support wildcard patterns", () => {
+    expect(isDomainWhitelisted("old.reddit.com", ["*.reddit.com"])).toBe(true);
+  });
+
+  it("should return false for empty whitelist", () => {
+    expect(isDomainWhitelisted("google.com", [])).toBe(false);
   });
 });
 

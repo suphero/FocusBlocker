@@ -1,3 +1,7 @@
+export function isDomainWhitelisted(host: string, whitelist: string[]): boolean {
+  return whitelist.some((domain) => isDomainBlocked(host, domain));
+}
+
 export function isDomainBlocked(host: string, blockedDomain: string): boolean {
   // Wildcard pattern: *.example.com matches sub.example.com but NOT example.com
   if (blockedDomain.startsWith("*.")) {

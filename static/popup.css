@@ -845,12 +845,87 @@ input:checked + .slider:before {
   }
 }
 
+/* ═══ Mode Toggle ═══ */
+
+.mode-toggle {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  background: var(--card-bg);
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 500;
+  background: none;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* ═══ Notification Section ═══ */
+
+.notification-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.toggle-row-compact {
+  margin-bottom: 8px;
+}
+
+.interval-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.interval-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.interval-select {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+.interval-select:focus {
+  border-color: var(--accent);
+}
+
 /* ═══ Password Section ═══ */
 
 .password-section {
   margin-top: 16px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
+}
+
+.password-section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .unlock-countdown {
@@ -933,6 +1008,74 @@ input:checked + .slider:before {
 
 .hidden {
   display: none !important;
+}
+
+/* ═══ Onboarding ═══ */
+
+.onboarding-modal {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 24px;
+  width: 320px;
+  text-align: center;
+}
+
+.onboarding-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.onboarding-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.onboarding-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.onboarding-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.onboarding-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.onboarding-dot.active {
+  background: var(--accent);
+}
+
+.onboarding-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.onboarding-skip {
+  margin-top: 12px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.onboarding-skip:hover {
+  color: var(--text);
 }
 
 /* ═══ Modal ═══ */
