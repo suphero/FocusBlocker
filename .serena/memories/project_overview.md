@@ -41,4 +41,4 @@ FocusBlocker/
 - **background.js**: Core logic. Listens to `tabs.onActivated`, `tabs.onUpdated`, and `storage.onChanged`. Redirects blocked sites to `blocked.html?url=<encoded-url>`. On disable, redirects blocked pages back to original URLs. Changes action icon based on enabled/disabled state.
 - **popup.js**: Simple form that loads/saves `enabled` (boolean) and `websites` (array) from `chrome.storage.local`.
 - **blocked.js**: Reads `url` query param and displays a link to the original URL.
-- Default blocked sites on install: facebook.com, twitter.com, instagram.com, youtube.com, whatsapp.com
+- Default blocked sites on install: facebook.com, x.com, instagram.com, youtube.com, whatsapp.com

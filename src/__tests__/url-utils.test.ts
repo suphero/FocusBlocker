@@ -93,16 +93,16 @@ describe("extractDomain", () => {
 
 describe("sanitizeWebsiteList", () => {
   it("should filter out empty lines", () => {
-    expect(sanitizeWebsiteList(["facebook.com", "", "twitter.com", ""])).toEqual([
+    expect(sanitizeWebsiteList(["facebook.com", "", "x.com", ""])).toEqual([
       "facebook.com",
-      "twitter.com",
+      "x.com",
     ]);
   });
 
   it("should deduplicate entries", () => {
-    expect(sanitizeWebsiteList(["facebook.com", "facebook.com", "twitter.com"])).toEqual([
+    expect(sanitizeWebsiteList(["facebook.com", "facebook.com", "x.com"])).toEqual([
       "facebook.com",
-      "twitter.com",
+      "x.com",
     ]);
   });
 
@@ -121,9 +121,9 @@ describe("sanitizeWebsiteList", () => {
   });
 
   it("should filter out invalid entries", () => {
-    expect(sanitizeWebsiteList(["facebook.com", "not valid", "", "twitter.com"])).toEqual([
+    expect(sanitizeWebsiteList(["facebook.com", "not valid", "", "x.com"])).toEqual([
       "facebook.com",
-      "twitter.com",
+      "x.com",
     ]);
   });
 

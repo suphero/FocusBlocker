@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Focus Blocker</title>
@@ -8,16 +8,20 @@
 
 <body>
     <h1>Focus Blocker</h1>
-    <form>
-        <label class="switch">
+    <div class="toggle-row">
+        <label class="switch" for="enabled">
             <input id="enabled" type="checkbox">
             <span class="slider"></span>
         </label>
-        <label for="websites">Blocked Websites:</label>
-        <textarea id="websites"></textarea>
-        <br>
-        <button id="save">Save</button>
-    </form>
+        <span id="toggleLabel" class="toggle-label">Focus Mode: OFF</span>
+    </div>
+    <span class="section-label">Blocked Websites</span>
+    <div id="chipList" class="chip-list"></div>
+    <div class="add-site">
+        <input id="siteInput" type="text" placeholder="example.com">
+        <button id="addBtn" type="button">Add</button>
+    </div>
+    <button id="save" class="save-btn" type="button">Save</button>
     <script type="module" src="popup.js"></script>
 </body>
 

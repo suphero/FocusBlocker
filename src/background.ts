@@ -69,7 +69,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     try {
       await chrome.storage.local.set({
         enabled: false,
-        websites: ["facebook.com", "twitter.com", "instagram.com", "youtube.com", "whatsapp.com"],
+        websites: ["facebook.com", "x.com", "instagram.com", "youtube.com", "whatsapp.com"],
       });
     } catch (error) {
       console.error("Failed to set default settings:", error);

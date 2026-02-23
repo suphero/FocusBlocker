@@ -31,11 +31,11 @@
 
 ## 4. UX / UI İyileştirmeleri
 
-- [ ] **Save sonrası geri bildirim** — Popup kapanmadan önce "Kaydedildi" mesajı
-- [ ] **Toggle label** — "Odak Modu Aktif/Pasif" yazısı eklenmeli
-- [ ] **Blocked page styling** — `blocked.html` hiç CSS içermiyor, tasarım eklenmeli
-- [ ] **Popup UI yenileme** — Textarea yerine chip/tag tarzı site listesi
-- [ ] **Dark mode** — Popup ve blocked page için karanlık tema desteği
+- [x] **Save sonrası geri bildirim** — Popup kapanmadan önce "Kaydedildi" mesajı
+- [x] **Toggle label** — "Odak Modu Aktif/Pasif" yazısı eklenmeli
+- [x] **Blocked page styling** — `blocked.html` hiç CSS içermiyor, tasarım eklenmeli
+- [x] **Popup UI yenileme** — Textarea yerine chip/tag tarzı site listesi
+- [x] **Dark mode** — Popup ve blocked page için karanlık tema desteği
 
 ## 5. Yeni Özellikler — Yüksek Etki
 
